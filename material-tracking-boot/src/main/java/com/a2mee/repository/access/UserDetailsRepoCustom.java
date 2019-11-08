@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.a2mee.model.access.UserDetails;
 
-public interface UserDetailsDao {
+public interface UserDetailsRepoCustom {
 
 	UserDetails addUser(UserDetails user);
 

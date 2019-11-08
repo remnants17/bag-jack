@@ -12,8 +12,8 @@ import com.a2mee.model.dto.access.RoleDetailDto;
 import com.a2mee.model.dto.access.RoleDto;
 import com.a2mee.model.dto.access.UserDto;
 import com.a2mee.model.dto.access.UsersWithRolesDto;
-import com.a2mee.repository.access.RolesDao;
-import com.a2mee.repository.access.UserDetailsDao;
+import com.a2mee.repository.access.RolesRepoCustom;
+import com.a2mee.repository.access.UserDetailsRepoCustom;
 import com.a2mee.model.access.Permission;
 import com.a2mee.model.access.Role;
 import com.a2mee.model.access.RolePermission;
@@ -24,10 +24,10 @@ import com.a2mee.services.access.RolesService;
 public class RolesServiceImpl implements RolesService 
 {
 	@Autowired
-	RolesDao rolesDao;
+	RolesRepoCustom rolesDao;
 	
 	@Autowired
-	UserDetailsDao userDetailsDao;
+	UserDetailsRepoCustom userDetailsDao;
 
 	
 

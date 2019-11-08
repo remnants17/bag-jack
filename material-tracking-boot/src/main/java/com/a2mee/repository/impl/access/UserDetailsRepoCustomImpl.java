@@ -17,13 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.a2mee.model.access.Role;
 import com.a2mee.model.access.UserDetails;
-import com.a2mee.repository.access.UserDetailsDao;
+import com.a2mee.repository.access.UserDetailsRepoCustom;
 
 
 
 @Transactional
 @Repository
-public class UserDetailsDaoImpl implements UserDetailsDao
+public class UserDetailsRepoCustomImpl implements UserDetailsRepoCustom
 {
 	
 

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.a2mee.model.access.Permission;
-import com.a2mee.repository.access.PermissionDao;
+import com.a2mee.repository.access.PermissionRepoCustom;
 import com.a2mee.services.access.PermissionService;
 
 
@@ -15,7 +15,7 @@ public class PermissionServiceImpl implements PermissionService
 
 {
 	@Autowired
-	PermissionDao permissiondaoDao;
+	PermissionRepoCustom permissiondaoDao;
 	@Override
 	public void addPermission(Permission userPermisson) {
 		permissiondaoDao.addPermission(userPermisson);
