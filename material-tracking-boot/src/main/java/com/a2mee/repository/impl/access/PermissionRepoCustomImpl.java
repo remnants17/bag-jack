@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.a2mee.model.access.Permission;
-import com.a2mee.repository.access.PermissionDao;
+import com.a2mee.repository.access.PermissionRepoCustom;
 
 @Transactional
 @Repository
-public class PermissionDaoImpl implements PermissionDao
+public class PermissionRepoCustomImpl implements PermissionRepoCustom
 
 {
 	

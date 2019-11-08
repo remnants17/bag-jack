@@ -16,13 +16,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.a2mee.model.access.UserDetails;
-import com.a2mee.repository.access.RolesDao;
+import com.a2mee.repository.access.RolesRepoCustom;
 import com.a2mee.model.access.Permission;
 import com.a2mee.model.access.Role;
 
 @Transactional
 @Repository
-public class RolesDaoImpl implements RolesDao
+public class RolesRepoCustomImpl implements RolesRepoCustom
 {
 
 	

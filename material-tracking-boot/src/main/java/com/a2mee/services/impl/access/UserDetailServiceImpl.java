@@ -12,7 +12,7 @@ import com.a2mee.model.dto.access.RoleDto;
 import com.a2mee.model.dto.access.UserDetailsDto;
 import com.a2mee.model.dto.access.UserPermissionDto;
 import com.a2mee.model.dto.access.UserRoleDto;
-import com.a2mee.repository.access.UserDetailsDao;
+import com.a2mee.repository.access.UserDetailsRepoCustom;
 import com.a2mee.model.access.RolePermission;
 import com.a2mee.model.access.UserDetails;
 import com.a2mee.services.access.UserDetailService;
@@ -23,7 +23,7 @@ public class UserDetailServiceImpl implements UserDetailService
 
 {
 	@Autowired
-	UserDetailsDao userDetailsDao;
+	UserDetailsRepoCustom userDetailsDao;
 	
 
 	@Override

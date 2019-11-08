@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.a2mee.model.access.Role;
 
-public interface RolesDao {
+public interface RolesRepoCustom {
 
 	void save(Role roles);
 

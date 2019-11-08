@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.a2mee.model.access.UserDetails;
-import com.a2mee.repository.access.UserDetailsDao;
+import com.a2mee.repository.access.UserDetailsRepoCustom;
 import com.a2mee.services.access.LoginService;
 @Service
 public class LoginServiceImpl implements LoginService{
 
 	
 	@Autowired
-	UserDetailsDao loginDao;
+	UserDetailsRepoCustom loginDao;
 	
 
 

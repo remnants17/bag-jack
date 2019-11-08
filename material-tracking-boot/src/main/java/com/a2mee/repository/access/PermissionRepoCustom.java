@@ -8,7 +8,7 @@ import com.a2mee.model.access.Permission;
 
 
 
-public interface PermissionDao {
+public interface PermissionRepoCustom {
 	
 	void addPermission(Permission userPermisson);
 
