@@ -17,7 +17,7 @@ angular.module('myApp', [
 	'myApp.login',
 	'myApp.generic',
 	
-	'myApp.qrGrn',
+	'myApp.qrGenerator',
 	'myApp.storageBin',
 	
 	'myApp.user',

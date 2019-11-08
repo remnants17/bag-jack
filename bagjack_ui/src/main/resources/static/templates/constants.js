@@ -4,5 +4,5 @@
 // const staticUrlAttendance = 'http://192.168.172.75:8095';
 
 /****************LOCAL HOST *****************/
-const staticUrl = 'http://localhost:8091';
-const staticUrlAttendance = 'http://localhost:8095'; 
+const staticUrl = 'http://localhost:8096';
+const staticUrlAttendance = 'http://localhost:8096'; 

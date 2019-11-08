@@ -2,7 +2,7 @@
     .img1 {
         /* -webkit-filter: drop-shadow(1px 1px 0 grey) drop-shadow(-1px -1px 0 grey);
         filter: drop-shadow(1px 1px 0 grey) drop-shadow(-1px -1px 0 grey); */
-        width: 80%;
+        width: 50%;
         height: 100%;
     }
 
@@ -78,7 +78,7 @@
             <!-- <a class="logo" ui-sref="main.home"> -->
             <a class="logo" href="javascript: void(0);">
                 <span>
-                    <img class="img1" src="assets/images/logo.png" alt="" height="45" />
+                    <img class="img1" src="assets/images/logo.png" alt="" />
                     <h4 style="color: #f1f1f1">Barcode Tracker</h4>
                 </span>
                 <i>
@@ -120,98 +120,19 @@
                                             class="mdi mdi-logout-variant"></i>Log out</a></li>
                         </ul>
                     </li>
-                    <!-- <li>
-                                <a href=" javascript: void(0);" ui-sref="main.home">
-                                                <i class="fi-air-play"></i> <span> Dashboard </span>
-                                    </a>
-                                </li> -->
-                    <li ng-show="showUploads">
-                        <a href=" javascript: void(0);" ui-sref="main.uploads">
-                            <i class="fa fa-upload" aria-hidden="true"></i> <span> Uploads </span>
-                        </a>
-                    </li>
-
-                    <li ng-show="showPOMaterial">
-                        <a href=" javascript: void(0);" ui-sref="main.purchaseOrder">
-                            <i class="fa fa-angle-double-down"></i> <span> PO - Inwards </span>
-                        </a>
-                    </li>
-                    <li ng-show="showGrn">
-                        <a href=" javascript: void(0);" ui-sref="main.grn">
-                            <i class="fa fa-book"></i> <span> Create GRN </span>
-                        </a>
-                    </li>
 
                     <li ng-show="showQrGenerator">
-                        <a href=" javascript: void(0);" ui-sref="main.qrGrn">
+                        <a href=" javascript: void(0);" ui-sref="main.qrGenerator">
                             <i class="fa fa-qrcode"></i> <span> GRN QR Generator </span>
                         </a>
                     </li>
 
-                    <li ng-show="showStorageBins || showModelPlan || showRequestedAssm">
-                        <a href="javascript: void(0);"><i class="fa fa-industry"></i> <span> Ware-House </span> <span
-                                class="menu-arrow"></span></a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li ng-show="showStorageBins">
-                                <a href=" javascript: void(0);" ui-sref="main.storageBin">
-                                    <i class="fa fa-archive"></i> <span> Storage </span>
-                                </a>
-                            </li>
-                            <li ng-show="showModelPlan">
-                                <a href=" javascript: void(0);" ui-sref="main.modelPlan">
-                                    <i class="fa fa-tasks"></i> <span> Model Plan </span>
-                                </a>
-                            </li>
-                            <li ng-show="showRequestedAssm">
-                                <a href=" javascript: void(0);" ui-sref="main.requestedAssm">
-                                    <i class="fa fa-flag"></i> <span> Req. Assemblies </span>
-                                </a>
-                            </li>
-                            <li ng-show="showKittingArea">
-                                <a href=" javascript: void(0);" ui-sref="main.kittingArea">
-                                    <i class="fa fa-suitcase"></i> <span> Kitting Area </span>
-                                </a>
-                            </li>
-                        </ul>
+                    <li ng-show="showStorageBins">
+                        <a href=" javascript: void(0);" ui-sref="main.storageBin">
+                            <i class="fa fa-archive"></i> <span> Storage </span>
+                        </a>
                     </li>
 
-                    <li ng-show="showCustomizeMachine || showRequestMachine">
-                        <a href="javascript: void(0);"><i class="fa fa-cogs"></i> <span> Machine </span> <span
-                                class="menu-arrow"></span></a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li ng-show="showCustomizeMachine"><a ui-sref="main.customizeMachine"
-                                    ui-sref-active="active">
-                                    <i class="fa fa-edit"></i>Customize</a></li>
-                            <li ng-show="showRequestMachine"><a ui-sref="main.requestMachine" ui-sref-active="active">
-                                    <i class="fa fa-flag"></i>Request</a></li>
-                        </ul>
-                    </li>
-
-                    <li ng-show="showAttendance">
-                        <a href="javascript: void(0);"><i class="fa fa-users"></i> <span> Man-Power </span> <span
-                                class="menu-arrow"></span></a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li><a ui-sref="main.employee" ui-sref-active="active">
-                                    <i class="fa fa-address-card"></i>Employee</a></li>
-                            <li><a ui-sref="main.attendance" ui-sref-active="active">
-                                    <i class="fa fa-check-circle"></i>Attendance</a></li>
-                        </ul>
-                    </li>
-
-                    <li ng-show="showReports">
-                        <a href="javascript: void(0);"><i class="fi-server"></i> <span> Reports </span> <span
-                                class="menu-arrow"></span></a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li><a ui-sref="main.deviationReport" ui-sref-active="active">
-                                    <i class="fi-server"></i>Deviation Report</a></li>
-                            <li><a ui-sref="main.grnReport" ui-sref-active="active">
-                                    <i class="fi-server"></i>GRN Report</a></li>
-                            <li><a ui-sref="main.putAwayReport" ui-sref-active="active">
-                                    <i class="fi-server"></i>PutAway Report</a></li>
-                            <li><a ui-sref="main.stocksReport" ui-sref-active="active">
-                                    <i class="fi-server"></i>Stocks Report</a></li>
-                        </ul>
-                    </li>
                     <li ng-show="showAccessManagement">
                         <a href="javascript: void(0);"><i class="fa fa-user"></i> <span> Admin </span> <span
                                 class="menu-arrow"></span></a>

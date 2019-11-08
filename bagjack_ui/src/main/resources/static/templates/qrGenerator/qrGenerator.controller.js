@@ -1,19 +1,19 @@
 /**
-  * @author 		: ABS
-  * @name			: qrGrnController
+  * @author 		: Anurag
+  * @name			: qrGeneratorController
   * @description 	: controller for QRGeneration module
-  * @date 			: 12/06/2018
+  * @date 			: 11/08/2019
   */
 (function() {
 	'use strict';
 
-	angular.module('myApp.qrGrn').controller('qrGrnController', qrGrnController).controller('GrnModalCtrl', GrnModalCtrl);
-	qrGrnController.$inject = ['$state', '$scope', 'toastr','DTColumnDefBuilder','DTOptionsBuilder','genericFactory','$uibModal'];//,'DTColumnDefBuilder'
+	angular.module('myApp.qrGenerator').controller('qrGeneratorController', qrGeneratorController).controller('qrGeneratorModalCtrl', qrGeneratorModalCtrl);
+	qrGeneratorController.$inject = ['$state', '$scope', 'toastr','DTColumnDefBuilder','DTOptionsBuilder','genericFactory','$uibModal'];//,'DTColumnDefBuilder'
 	
-	GrnModalCtrl.$inject = ['$state', '$scope', 'toastr', 'grnItem',
+	qrGeneratorModalCtrl.$inject = ['$state', '$scope', 'toastr', 'grnItem',
 		'DTColumnDefBuilder', 'DTOptionsBuilder', 'genericFactory', 'localStorageService', 'ApiEndpoint', '$filter', '$log', '$uibModalInstance'];
 	/* @ngInject */
-	function qrGrnController($state, $scope, toastr, DTColumnDefBuilder, DTOptionsBuilder,genericFactory,$uibModal) {//, DTColumnDefBuilder
+	function qrGeneratorController($state, $scope, toastr, DTColumnDefBuilder, DTOptionsBuilder,genericFactory,$uibModal) {//, DTColumnDefBuilder
 		var purchaseOrder = staticUrl + '/purchaseOrder';
 		var grn = staticUrl + '/grn';
 		$scope.changeMaterial = true;
@@ -452,7 +452,7 @@
 		
 		}
 	
-	function GrnModalCtrl($state, $scope, toastr, grnItem,
+	function qrGeneratorModalCtrl($state, $scope, toastr, grnItem,
 			DTColumnDefBuilder, DTOptionsBuilder, genericFactory, localStorageService, ApiEndpoint, $filter, $log, $uibModalInstance) {
 
 			var grn = staticUrl + '/grn';
