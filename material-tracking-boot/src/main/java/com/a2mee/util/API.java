@@ -3,8 +3,14 @@ package com.a2mee.util;
 public class API {
 
 	/* ........Category....... */
-	public static final String category = "category";
-	public static final String uploadCategories = "uploadCategories";
+	public static final String category = "/category";
+	public static final String uploadCategories = "/uploadCategories";
+	public static final String getProductTypes = "/getProductTypes";
+	public static final String getModelCodes = "/getModelCodes";
+	public static final String getArtists = "/getArtists";
+	public static final String getSizes = "/getSizes";
+	public static final String getColorsByGender = "/getColorsByGender";
+	public static final String getColorsByCode = "/getColorsByCode";
 	
 	
 	/* ........User/Role/Permission....... */
@@ -48,6 +54,7 @@ public class API {
 		/* ...Login..... */
 		public static final String login = "login";
 		public static final String authenticate = "/authenticate";
+		public static final String getGenders = "/getGenders";
 
 }
 	

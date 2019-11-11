@@ -22,9 +22,6 @@ public class CategoriesMst {
 	@Column(name="model_code")
 	private String modelCode;
 	
-	@Column(name="model_type")
-	private String modelType;
-	
 	@Column(name="artist")
 	private String artist;
 	
@@ -59,14 +56,6 @@ public class CategoriesMst {
 
 	public void setModelCode(String modelCode) {
 		this.modelCode = modelCode;
-	}
-
-	public String getModelType() {
-		return modelType;
-	}
-
-	public void setModelType(String modelType) {
-		this.modelType = modelType;
 	}
 
 	public String getArtist() {
@@ -104,8 +93,7 @@ public class CategoriesMst {
 	@Override
 	public String toString() {
 		return "CategoriesMst [categoryId=" + categoryId + ", productType=" + productType + ", modelCode=" + modelCode
-				+ ", modelType=" + modelType + ", artist=" + artist + ", color=" + color + ", size=" + size
-				+ ", gender=" + gender + "]";
+				+ ", artist=" + artist + ", color=" + color + ", size=" + size + ", gender=" + gender + "]";
 	}	
 	
 }
