@@ -119,8 +119,8 @@
 				.withOption('scrollCollapse', true)
 				.withOption('autoWidth', false);
 			$scope.dtColumnDefs = [
-				DTColumnDefBuilder.newColumnDef(9).notSortable(),
-				DTColumnDefBuilder.newColumnDef(9).notSortable()];
+				DTColumnDefBuilder.newColumnDef(1).notSortable(),
+				DTColumnDefBuilder.newColumnDef(1).notSortable()];
 
 		}
 		init();
