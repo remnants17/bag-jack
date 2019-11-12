@@ -78,11 +78,11 @@ public class CategoryController {
 								String modelType = formatter.formatCellValue(row.getCell(2));
 								String artist = formatter.formatCellValue(row.getCell(3));
 								String color = formatter.formatCellValue(row.getCell(4));
-								CategoriesMst category = categoriesService.getFC(productType, modelCode+" - "+modelType, artist, color);
+								CategoriesMst category = categoriesService.getFC(productType, modelCode+"-"+modelType, artist, color);
 								if(category==null) {
 									CategoriesMst theCategory = new CategoriesMst();
 									theCategory.setProductType(productType);
-									theCategory.setModelCode(modelCode + " - " + modelType);
+									theCategory.setModelCode(modelCode + "-" + modelType);
 									theCategory.setArtist(artist);
 									theCategory.setColor(color);
 									categories.add(theCategory);
@@ -149,11 +149,11 @@ public class CategoryController {
 								String modelType = formatter.formatCellValue(row.getCell(2));
 								String artist = formatter.formatCellValue(row.getCell(3));
 								String color = formatter.formatCellValue(row.getCell(4));
-								CategoriesMst category = categoriesService.getLG(productType, modelCode+" - "+modelType, artist, color);
+								CategoriesMst category = categoriesService.getLG(productType, modelCode+"-"+modelType, artist, color);
 								if(category==null) {
 									CategoriesMst theCategory = new CategoriesMst();
 									theCategory.setProductType(productType);
-									theCategory.setModelCode(modelCode + " - " + modelType);
+									theCategory.setModelCode(modelCode + "-" + modelType);
 									theCategory.setArtist(artist);
 									theCategory.setColor(color);
 									categories.add(theCategory);

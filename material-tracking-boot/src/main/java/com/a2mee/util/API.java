@@ -13,6 +13,14 @@ public class API {
 	public static final String getColorsByCode = "/getColorsByCode";
 	
 	
+	/* ........Stock....... */
+	public static final String stock = "/stock";
+	public static final String getProductCount = "/getProductCount";
+	public static final String addStock = "/addStock";
+	public static final String getStockByProduct = "/getStockByProduct";
+	public static final String getStock = "/getStock";
+	
+	
 	/* ........User/Role/Permission....... */
 	
 		/* ........User....... */

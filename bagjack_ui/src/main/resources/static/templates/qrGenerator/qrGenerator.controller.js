@@ -14,16 +14,14 @@
 	/* @ngInject */
 	function qrGeneratorController($state, $scope, toastr, genericFactory, $http) { //, DTColumnDefBuilder
 		var categoryLink = staticUrl + '/category';
+		var stockLink = staticUrl + '/stock';
 		$scope.showArtists = false;
 		$scope.showModelCodes = false;
 		$scope.showSizes = false;
 		$scope.showGenders = false;
 		$scope.showColors = false;
 		$scope.showQuantity = false;
-
-		$scope.selectedVendor = {};
-		$scope.qrCodeArr = [];
-		$scope.printButton = true;
+		$scope.showPrintArea = false;
 		$scope.finalArr = [];
 
 		var vm = angular.extend(this, {
@@ -43,6 +41,19 @@
 			var url = categoryLink + "/getProductTypes";
 			genericFactory.getAll(msg, url).then(function (response) {
 				$scope.productTypes = response.data;
+			});
+		}
+
+		/**
+		 * @author : Anurag
+		 * @Description : fetch Count
+		 * @date : 12/11/2019
+		 */
+		$scope.fetchCount = function () {
+			var msg = "Products registered count load....', 'Successful !!";
+			var url = stockLink + "/getProductCount";
+			genericFactory.getAll(msg, url).then(function (response) {
+				$scope.productCount = response.data;
 			});
 		}
 
@@ -71,6 +82,7 @@
 				$scope.showGenders = false;
 				$scope.showColors = false;
 				$scope.showQuantity = false;
+				$scope.showPrintArea = false;
 			});
 		}
 
@@ -96,6 +108,7 @@
 					$scope.showGenders = false;
 					$scope.showColors = false;
 					$scope.showQuantity = false;
+					$scope.showPrintArea = false;
 				});
 			} else {
 				msg = "Model Code Load....', 'Successful !!";
@@ -108,6 +121,7 @@
 					$scope.showGenders = false;
 					$scope.showColors = false;
 					$scope.showQuantity = false;
+					$scope.showPrintArea = false;
 				});
 			}
 		}
@@ -130,6 +144,7 @@
 				$scope.showGenders = true;
 				$scope.showColors = false;
 				$scope.showQuantity = false;
+				$scope.showPrintArea = false;
 			});
 		}
 
@@ -151,6 +166,7 @@
 				$scope.showGenders = true;
 				$scope.showColors = true;
 				$scope.showQuantity = false;
+				$scope.showPrintArea = false;
 			});
 		}
 
@@ -175,6 +191,7 @@
 					$scope.showGenders = false;
 					$scope.showColors = true;
 					$scope.showQuantity = false;
+					$scope.showPrintArea = false;
 				});
 			} else {				
 				$scope.quantity = '';
@@ -246,147 +263,9 @@
 		}
 
 		/**
-		 * @author : ABS
-		 * @description : to generate QR code
-		 * @date : 19/06/2018
-		 */
-		$scope.makeCode = function () {
-			if($scope.selectedProduct == ''){
-				return
-			}
-			if($scope.selectedProduct == 'FC')
-				if($scope.selectedModelCode == undefined || $scope.selectedArtist == undefined){
-					toastr.error("Please select all fields")
-					return;
-				}
-
-			if($scope.selectedProduct == 'Jacket')
-				if($scope.selectedArtist == undefined || $scope.selectedSize == undefined || $scope.selectedGender == undefined || $scope.selectedColor == undefined){
-					toastr.error("Please select all fields")
-					return;
-				}
-
-			if($scope.selectedProduct == 'LD')
-				if($scope.selectedModelCode == undefined || $scope.selectedArtist == undefined){
-					toastr.error("Please select all fields")
-					return;
-				}
-
-			if($scope.selectedProduct == 'LG')
-				if($scope.selectedModelCode == undefined || $scope.selectedArtist == undefined || $scope.selectedColor == undefined){
-					toastr.error("Please select all fields")
-					return;
-				}
-
-			if($scope.selectedProduct == 'Sling')
-				if($scope.selectedModelCode == undefined || $scope.selectedArtist == undefined){
-					toastr.error("Please select all fields")
-					return;
-				}
-
-			console.log($scope.selectedProduct + " " + $scope.selectedArtist + " " + $scope.selectedSize + " " + $scope.selectedGender + " " + $scope.selectedModelCode + " " + $scope.selectedColor)
-				console.log("Check" + $scope.selectedSize)
-
-
-
-			// $scope.disableQrCodeButton = true;
-			// $scope.qrCodeArr = [];
-			// var sArr = [];
-			// var copiesArr = [];
-			// $scope.copiesArr = [];
-			// $scope.qrArrAll = [];
-
-			// for (var i = 0; i < $scope.finalArr.length; i++) {
-			// 	var qrDiv = document.getElementById("qr" + i); // to remove all generated QR code from div
-			// 	while (qrDiv.firstChild) {
-			// 		qrDiv.removeChild(qrDiv.firstChild);
-			// 	}
-			// }
-
-			// $scope.finalArr = [];
-			// var qrDiv = document.getElementById("QR");
-
-			// for (var index in $scope.allDetails) {
-			// 	if ($scope.allDetails[index].printQty == true) {
-			// 		$scope.qrCodeArr.push($scope.allDetails[index]);
-			// 		var val = parseInt($scope.allDetails[index].printCopies);
-			// 		if (isNaN(val) || val < 1) {
-			// 			$scope.printButton = true;
-			// 			toastr.error('Please enter proper number to print copies.');
-			// 			document.getElementById('print' + index).focus();
-			// 			return;
-			// 		}
-			// 		//  copiesArr.push(val);
-			// 		$scope.allDetails[index].isQrGenerated = true;
-			// 		$scope.copiesArr.push(val);
-			// 		for (var i = 0; i < val; i++) {
-			// 			var iObj = Object.assign({}, $scope.allDetails[index]);
-			// 			iObj.amt = i + 1;
-			// 			if (i > 0) {
-			// 				iObj.copy = true;
-			// 			}
-			// 			$scope.qrArrAll.push(iObj);
-			// 		}
-			// 	}
-			// }
-			// console.log(JSON.stringify($scope.qrArrAll));
-			// $scope.finalArr = $scope.qrArrAll;
-			// console.log(JSON.stringify($scope.finalArr));
-			// if (!$scope.qrCodeArr || $scope.qrCodeArr.length == 0) {
-			// 	toastr.error('Please select checkbox');
-			// 	return;
-			// }
-
-
-			// setTimeout(function () {
-			// 	var arr = [];
-			// 	console.log(JSON.stringify($scope.finalArr));
-			// 	for (var i in $scope.finalArr) {
-			// 		var day = new Date($scope.finalArr[i].grnEntryDate).getDate();
-			// 		var month = new Date($scope.finalArr[i].grnEntryDate).getMonth();
-			// 		month = parseInt(month) + 1;
-			// 		var year = new Date($scope.finalArr[i].grnEntryDate).getFullYear();
-
-			// 		var qrCodeStr = '001//' + $scope.finalArr[i].grnId + '//' + $scope.finalArr[i].grnNo + '//' + $scope.finalArr[i].itemMstId + '//' + day + '-' + month + '-' + year; //$scope.qrCodeArr[i].venPostDate;
-			// 		qrCodeStr = qrCodeStr.replace(/\s/g, '');
-			// 		var e = document.getElementById('qr' + i);
-			// 		generateQRCode('qr' + i, qrCodeStr);
-
-
-
-			// 		if (!$scope.finalArr[i].barcode || $scope.finalArr[i].barcode == '' || $scope.finalArr[i].barcode == null) {
-			// 			if (arr.indexOf($scope.finalArr[i].grnItmLotID) == -1) {
-			// 				arr.push($scope.finalArr[i].grnItmLotID);
-			// 				var msg = "QR code submitted....', 'Successfully !!";
-			// 				var url = grn + "/updateQr?grItmlotId=" + $scope.finalArr[i].grnItmLotID + " &qrCodeNo=" + qrCodeStr;
-			// 				genericFactory.getAll(msg, url).then(function (response) {
-
-			// 				});
-			// 			}
-			// 		}
-			// 	}
-			// }, 0);
-
-
-
-			// if ($scope.qrCodeArr && $scope.qrCodeArr.length > 0)
-			// 	$scope.printButton = false;
-			// else
-			// 	$scope.printButton = true;
-
-			// setTimeout(function () {
-			// 	window.scroll({
-			// 		top: document.body.scrollHeight,
-			// 		left: 0,
-			// 		behavior: 'smooth'
-			// 	});
-			// }, 10);
-		}
-
-		/**
-		 * @author : ABS
-		 * @description : to generate QR code
-		 * @date : 19/06/2018
+		 * @author : Anurag
+		 * @description : to use library and generate QR Code
+		 * @date : 12/11/2019
 		 */
 		var generateQRCode = function (divId, s) {
 			var qrcode = new QRCode(document.getElementById(divId), {
@@ -394,21 +273,214 @@
 				height: 100
 			});
 			qrcode.makeCode(s);
-		}
+		};
 
 		/**
-		 * @author : ABS
-		 * @description : to print QR code
-		 * @date : 19/06/2018
+		 * @author : Anurag
+		 * @description : Show qrcode on divs after generating code
+		 * @date : 12/11/2019
 		 */
-		$scope.printCode = function () {
-			var innerContents = document.getElementById('QR').innerHTML;
-			var popupWinindow = window.open('', '_blank', 'width=600,height=700,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
-			popupWinindow.document.open();
-			popupWinindow.document.write('<style> @page {  margin: 8;} </style>');
-			// popupWinindow.document.write('<html><head><style>.ng-hide { display: none !important; }</style></head><body onload="window.print()">' + innerContents + '</html>');
-			popupWinindow.document.write('<html><body onload="window.print()">' + innerContents + '</html>');
-			popupWinindow.document.close();
+		$scope.buildCode = function () {			
+			$scope.fetchCount();
+			var qrCode = "";
+			for (var i in $scope.qrCodeArr) {
+				var qrDiv1 = document.getElementById("qrPrint" + i);
+				if (qrDiv1) {
+					while (qrDiv1.firstChild) {
+						qrDiv1.removeChild(qrDiv1.firstChild);
+					}
+				}
+			}
+
+			$scope.qrCodeArr = [];
+			$scope.finalArr = [];
+
+			if($scope.selectedProduct == '' || $scope.selectedProduct == undefined){
+				toastr.error("Please select Product")
+				return;
+			}
+
+			if($scope.selectedProduct == 'FC' || $scope.selectedProduct == 'LD' || $scope.selectedProduct == 'Sling')
+				if(!$scope.selectedModelCode || !$scope.selectedArtist || $scope.selectedModelCode == "" || $scope.selectedArtist == ""){
+					toastr.error("Please select all fields")
+					return;
+				}else{
+					qrCode = $scope.selectedProduct.substring(0, 2).toUpperCase()+"-"+
+							$scope.selectedArtist.substring(0, 2).toUpperCase()+"-"+
+							$scope.selectedModelCode.split('-')[0]+"-"+							
+							"na"+"-"+
+							"n"+"-"+
+							"na";
+
+					for (var i = 0; i < $scope.quantity; i++) {
+							var count = ++$scope.productCount;
+							var obj = {
+								productCode: qrCode+"-"+zeroFill(count, 6),
+								productType: $scope.selectedProduct,
+								artist: $scope.selectedArtist,
+								modelCode: $scope.selectedModelCode,
+								size: "NA",
+								gender: "NA",
+								color: "NA",
+								serialCode: zeroFill(count, 6)
+							};
+							var finalObj = {
+								productCode: qrCode+"-"+zeroFill(count, 6),
+								productType: $scope.selectedProduct,
+								artist: $scope.selectedArtist,
+								modelCode: $scope.selectedModelCode,
+								productCount: count,
+								serialCode: zeroFill(count, 6),
+								isSold: 0
+							}
+							$scope.qrCodeArr.push(obj);
+							$scope.finalArr.push(finalObj);
+					}
+				}
+
+			if($scope.selectedProduct == 'Jacket')
+				if(!$scope.selectedArtist || !$scope.selectedSize || !$scope.selectedGender || !$scope.selectedColor ||
+					$scope.selectedArtist == "" || $scope.selectedSize == "" || $scope.selectedGender == "" || $scope.selectedColor == ""){
+					toastr.error("Please select all fields")
+					return;
+				}else{
+					qrCode = $scope.selectedProduct.substring(0, 2).toUpperCase()+"-"+
+							$scope.selectedArtist.substring(0, 2).toUpperCase()+"-"+
+							"na"+"-"+							
+							$scope.selectedSize.substring(0, 2).toUpperCase()+"-"+
+							$scope.selectedGender+"-"+
+							$scope.selectedColor.substring(0, 2).toUpperCase();
+
+					for (var i = 0; i < $scope.quantity; i++) {
+							var count = ++$scope.productCount;
+							var obj = {
+								productCode: qrCode+"-"+zeroFill(count, 6),
+								productType: $scope.selectedProduct,
+								artist: $scope.selectedArtist,
+								modelCode: "NA",
+								size: $scope.selectedSize,
+								gender: $scope.selectedGender,
+								color: $scope.selectedColor,
+								serialCode: zeroFill(count, 6)
+							};
+							var finalObj = {
+								productCode: qrCode+"-"+zeroFill(count, 6),
+								productType: $scope.selectedProduct,
+								artist: $scope.selectedArtist,
+								size: $scope.selectedSize,
+								gender: $scope.selectedGender,
+								color: $scope.selectedColor,
+								productCount: count,
+								serialCode: zeroFill(count, 6),
+								isSold: 0
+							}
+							$scope.qrCodeArr.push(obj);
+							$scope.finalArr.push(finalObj);
+					}
+				}			
+
+			if($scope.selectedProduct == 'LG')
+				if(!$scope.selectedModelCode || !$scope.selectedArtist || !$scope.selectedColor || 
+					$scope.selectedModelCode == "" || $scope.selectedArtist == "" || $scope.selectedColor == ""){
+					toastr.error("Please select all fields")
+					return;
+				}else{
+					qrCode = $scope.selectedProduct.substring(0, 2).toUpperCase()+"-"+
+							$scope.selectedArtist.substring(0, 2).toUpperCase()+"-"+
+							$scope.selectedModelCode.split('-')[0]+"-"+							
+							"na"+"-"+
+							"n"+"-"+
+							$scope.selectedColor.substring(0, 2).toUpperCase();
+
+					for (var i = 0; i < $scope.quantity; i++) {
+							var count = ++$scope.productCount;
+							var obj = {
+								productCode: qrCode+"-"+zeroFill(count, 6),
+								productType: $scope.selectedProduct,
+								artist: $scope.selectedArtist,
+								modelCode: $scope.selectedModelCode,
+								size: "NA",
+								gender: "NA",
+								color: $scope.selectedColor,
+								serialCode: zeroFill(count, 6),
+								isSold: 0
+							};
+							var finalObj = {
+								productCode: qrCode+"-"+zeroFill(count, 6),
+								productType: $scope.selectedProduct,
+								artist: $scope.selectedArtist,
+								modelCode: $scope.selectedModelCode,
+								color: $scope.selectedColor,
+								productCount: count,
+								serialCode: zeroFill(count, 6)
+							}
+							$scope.qrCodeArr.push(obj);
+							$scope.finalArr.push(finalObj);
+					}
+				}
+
+			$scope.showPrintArea = true;
+
+			setTimeout(function () {
+				// console.log($scope.qrCodeArr.length);
+				for (var i = 0; i < $scope.qrCodeArr.length; i++) {
+					generateQRCode("qrPrint" + i, $scope.qrCodeArr[i].productCode);
+					// console.log("hello");
+				}
+			}, 50);
+
+			setTimeout(function(){
+				window.scroll({
+					 top: document.body.scrollHeight, 
+					 left: 0, 
+					 behavior: 'smooth' 
+				   });
+			},10);
+		};
+
+		/**
+		 * @author : Anurag
+		 * @description : Print qrcode and update backend
+		 * @date : 12/11/2019
+		 */
+		$scope.printCode = function(){
+			var innerContents = "";
+
+				for (var i = 0; i < $scope.qrCodeArr.length; i++) {
+					innerContents =
+						innerContents +
+						document.getElementById("qrPrintParent" + i).innerHTML;
+				}
+				var popupWinindow = window.open(
+					"",
+					"_blank",
+					"width=600,height=700,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no"
+				);
+				popupWinindow.document.open();
+				popupWinindow.document.write("<style> @page {  margin: 8;} </style>");
+				popupWinindow.document.write(
+					'<html><body onload="window.print()">' + innerContents + "</html>"
+				);
+				popupWinindow.document.close();
+
+				setTimeout(function(){
+					var msg = "Saving Stock";
+					var url = stockLink + "/addStock";
+			 		console.log(JSON.stringify($scope.finalArr));
+					genericFactory.add(msg, url, $scope.finalArr).then(function (response) {
+						$scope.showPrintArea = false;
+						$scope.quantity = "";
+						$scope.fetchCount();
+					});
+				},100);
+		}
+
+		function zeroFill( number, width ){
+ 			width -= number.toString().length;
+  			if ( width > 0 ){
+    			return new Array( width + (/\./.test( number ) ? 2 : 1) ).join( '0' ) + number;
+  			}
+  			return number + ""; // always return a string
 		}
 
 		/**
@@ -418,6 +490,7 @@
 		 */
 		var init = function () {
 			$scope.fetchProductType();
+			$scope.fetchCount();
 		}
 
 		init();
