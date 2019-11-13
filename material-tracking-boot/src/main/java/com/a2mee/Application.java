@@ -6,7 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 
 
 @SpringBootApplication
-@PropertySource("classpath:sql.properties")
+//@PropertySource("classpath:sql.properties")
 /*@SpringBootConfiguration
 @EnableAutoConfiguration*/
 /*@EnableBatchProcessing
