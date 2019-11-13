@@ -329,9 +329,12 @@
 								productType: $scope.selectedProduct,
 								artist: $scope.selectedArtist,
 								modelCode: $scope.selectedModelCode,
+								size: "NA",
+								gender: "NA",
+								color: "NA",
 								productCount: count,
 								serialCode: zeroFill(count, 6),
-								isSold: 0
+								isSold: 'N'
 							}
 							$scope.qrCodeArr.push(obj);
 							$scope.finalArr.push(finalObj);
@@ -367,12 +370,13 @@
 								productCode: qrCode+"-"+zeroFill(count, 6),
 								productType: $scope.selectedProduct,
 								artist: $scope.selectedArtist,
+								modelCode: "NA",
 								size: $scope.selectedSize,
 								gender: $scope.selectedGender,
 								color: $scope.selectedColor,
 								productCount: count,
 								serialCode: zeroFill(count, 6),
-								isSold: 0
+								isSold: 'N'
 							}
 							$scope.qrCodeArr.push(obj);
 							$scope.finalArr.push(finalObj);
@@ -403,16 +407,18 @@
 								gender: "NA",
 								color: $scope.selectedColor,
 								serialCode: zeroFill(count, 6),
-								isSold: 0
 							};
 							var finalObj = {
 								productCode: qrCode+"-"+zeroFill(count, 6),
 								productType: $scope.selectedProduct,
 								artist: $scope.selectedArtist,
 								modelCode: $scope.selectedModelCode,
+								size: "NA",
+								gender: "NA",
 								color: $scope.selectedColor,
 								productCount: count,
-								serialCode: zeroFill(count, 6)
+								serialCode: zeroFill(count, 6),								
+								isSold: 'N'
 							}
 							$scope.qrCodeArr.push(obj);
 							$scope.finalArr.push(finalObj);

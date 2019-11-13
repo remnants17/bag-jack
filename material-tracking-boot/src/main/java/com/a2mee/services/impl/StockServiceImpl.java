@@ -37,4 +37,27 @@ public class StockServiceImpl implements StockService {
 		return stockRepo.getStock();
 	}
 
+	@Override
+	public Stock getStockByQrCode(String qrCode) {
+		Optional<Stock> stock = stockRepo.getStockByQrCode(qrCode);
+		return stock.isPresent()? stock.get() : null;
+	}
+
+	@Override
+	public void update(List<Stock> stocks) {
+		stockRepo.saveAll(stocks);
+	}
+
+	@Override
+	public Stock getStockByRetQrCode(String retQrCode) {
+		Optional<Stock> stock = stockRepo.getStockByRetQrCode(retQrCode);
+		return stock.isPresent()? stock.get() : null;
+	}
+
+	@Override
+	public Stock getStockBySerial(String serialNo) {
+		Optional<Stock> stock = stockRepo.getStockBySerial(serialNo);
+		return stock.isPresent()? stock.get() : null;
+	}
+
 }

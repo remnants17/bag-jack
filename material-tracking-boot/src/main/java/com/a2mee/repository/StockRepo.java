@@ -17,10 +17,19 @@ public interface StockRepo extends JpaRepository<Stock, Integer> {
 
 	List<Stock> findAllByProductType(String productType);
 
-	@Query("FROM Stock s where s.productType=?1 AND s.isSold=0")
+	@Query("FROM Stock s where s.productType=?1 AND s.isSold!='S'")
 	List<Stock> getStockByProduct(String productType);
 
-	@Query("FROM Stock s where s.isSold=0")
+	@Query("FROM Stock s where s.isSold!='S'")
 	List<Stock> getStock();
+
+	@Query("FROM Stock s where s.productCode=?1 and s.isSold!='S'")
+	Optional<Stock> getStockByQrCode(String qrCode);
+
+	@Query("FROM Stock s where s.productCode=?1 and s.isSold='S'")
+	Optional<Stock> getStockByRetQrCode(String retQrCode);
+
+	@Query("FROM Stock s where s.serialCode=?1 and s.isSold='S'")
+	Optional<Stock> getStockBySerial(String serialNo);
 
 }

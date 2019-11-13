@@ -76,4 +76,59 @@ public class StockController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	/* for getting stock by serial Code */
+	@GetMapping(API.getStockByQrCode)
+	public @ResponseBody ResponseEntity<Stock> getStockByQrCode(@RequestParam String qrCode){
+		try {
+			return new ResponseEntity<Stock>(stockService.getStockByQrCode(qrCode), HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/* for getting stock by qrCode */
+	@GetMapping(API.getStockBySerial)
+	public @ResponseBody ResponseEntity<Stock> getStockBySerial(@RequestParam String serialNo){
+		try {
+			return new ResponseEntity<Stock>(stockService.getStockBySerial(serialNo), HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/* for selling items */
+	@PostMapping(API.sellItems)
+	public @ResponseBody ResponseEntity sellItems(@RequestBody List<Stock> stocks){
+		try {
+			stocks.forEach(s->s.setIsSold("S"));
+			stockService.update(stocks);
+			return new ResponseEntity(HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/* for getting stock by return qrCode */
+	@GetMapping(API.getStockByRetQrCode)
+	public @ResponseBody ResponseEntity<Stock> getStockByRetQrCode(@RequestParam String retQrCode){
+		try {
+			return new ResponseEntity<Stock>(stockService.getStockByRetQrCode(retQrCode), HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/* for restocking returned items */
+	@PostMapping(API.reStockItems)
+	public @ResponseBody ResponseEntity reStockItems(@RequestBody List<Stock> stocks){
+		try {
+			stocks.forEach(s->s.setIsSold("R"));
+			stockService.update(stocks);
+			return new ResponseEntity(HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 }

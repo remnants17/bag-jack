@@ -32,7 +32,7 @@ public class Stock {
 	private String modelCode;
 	
 	@Column(name="size")
-	private int size;
+	private String size;
 	
 	@Column(name="gender")
 	private String gender;
@@ -82,7 +82,7 @@ public class Stock {
 		return artist;
 	}
 
-	public void setArtist(String artist) {
+	public void setArtist(String artist) {		
 		this.artist = artist;
 	}
 
@@ -94,11 +94,11 @@ public class Stock {
 		this.modelCode = modelCode;
 	}
 
-	public int getSize() {
+	public String getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 

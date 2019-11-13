@@ -10,7 +10,7 @@ public interface CategoriesService{
 
 	CategoriesMst getFC(String productType, String modelCode, String artist, String color);
 	
-	CategoriesMst getJacket(String productType, String artist, int size, String color, String gender);
+	CategoriesMst getJacket(String productType, String artist, String size, String color, String gender);
 
 	CategoriesMst getLD(String productType, String artist, String modelCode);
 
@@ -26,11 +26,11 @@ public interface CategoriesService{
 
 	List<String> getModelCodes(String artist, String productType);
 
-	List<Integer> getSizes(String artist, String productType);
+	List<String> getSizes(String artist, String productType);
 
-	List<String> getGenders(String artist, String productType, int size);
+	List<String> getGenders(String artist, String productType, String size);
 
-	List<String> getColorsByGender(String artist, String productType, int size, String gender);
+	List<String> getColorsByGender(String artist, String productType, String size, String gender);
 
 	List<String> getColorsByCode(String artist, String productType, String modelCode);
 	

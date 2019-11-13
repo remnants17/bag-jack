@@ -100,7 +100,7 @@ public class CategoryController {
 							if (row.getCell(0) != null) {
 								String productType = "Jacket";
 								String artist = formatter.formatCellValue(row.getCell(1));
-								int size = Integer.parseInt(formatter.formatCellValue(row.getCell(2)));
+								String size = formatter.formatCellValue(row.getCell(2));
 								String color = formatter.formatCellValue(row.getCell(3));
 								String gender = formatter.formatCellValue(row.getCell(4));
 								CategoriesMst category = categoriesService.getJacket(productType, artist, size, color, gender);
@@ -228,16 +228,16 @@ public class CategoryController {
 	}
 	
 	@GetMapping(API.getSizes)
-	public @ResponseBody ResponseEntity<List<Integer>> getSizes(@RequestParam String artist, @RequestParam String productType){
+	public @ResponseBody ResponseEntity<List<String>> getSizes(@RequestParam String artist, @RequestParam String productType){
 		try {
-			return new ResponseEntity<List<Integer>>(categoriesService.getSizes(artist, productType), HttpStatus.OK);
+			return new ResponseEntity<List<String>>(categoriesService.getSizes(artist, productType), HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@GetMapping(API.getGenders)
-	public @ResponseBody ResponseEntity<List<String>> getGenders(@RequestParam String artist, @RequestParam String productType, @RequestParam int size){
+	public @ResponseBody ResponseEntity<List<String>> getGenders(@RequestParam String artist, @RequestParam String productType, @RequestParam String size){
 		try {
 			return new ResponseEntity<List<String>>(categoriesService.getGenders(artist, productType, size), HttpStatus.OK);
 		}catch(Exception e) {
@@ -246,7 +246,7 @@ public class CategoryController {
 	}
 	
 	@GetMapping(API.getColorsByGender)
-	public @ResponseBody ResponseEntity<List<String>> getColors(@RequestParam String artist, @RequestParam String productType, @RequestParam int size, @RequestParam String gender){
+	public @ResponseBody ResponseEntity<List<String>> getColors(@RequestParam String artist, @RequestParam String productType, @RequestParam String size, @RequestParam String gender){
 		try {
 			return new ResponseEntity<List<String>>(categoriesService.getColorsByGender(artist, productType, size, gender), HttpStatus.OK);
 		}catch(Exception e) {

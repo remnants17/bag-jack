@@ -16,7 +16,7 @@ public interface CategoriesRepo extends JpaRepository<CategoriesMst, Integer> {
 			String modelCode, String artist, String color);
 
 	Optional<CategoriesMst> findByProductTypeAndArtistAndSizeAndColorAndGender(String productType, String artist,
-			int size, String color, String gender);
+			String size, String color, String gender);
 
 	Optional<CategoriesMst> findByProductTypeAndArtistAndModelCode(String productType, String artist, String modelCode);
 
@@ -30,13 +30,13 @@ public interface CategoriesRepo extends JpaRepository<CategoriesMst, Integer> {
 	List<String> getModelCodes(String artist, String productType);
 
 	@Query("SELECT DISTINCT c.size FROM CategoriesMst c where c.artist=?1 and c.productType=?2")
-	List<Integer> getSizes(String artist, String productType);
+	List<String> getSizes(String artist, String productType);
 
 	@Query("SELECT DISTINCT c.gender FROM CategoriesMst c where c.artist=?1 and c.productType=?2 and c.size=?3")
-	List<String> getGenders(String artist, String productType, int size);
+	List<String> getGenders(String artist, String productType, String size);
 
 	@Query("SELECT DISTINCT c.color FROM CategoriesMst c where c.artist=?1 and c.productType=?2 and c.size=?3 and c.gender=?4")
-	List<String> getColorsByGender(String artist, String productType, int size, String gender);
+	List<String> getColorsByGender(String artist, String productType, String size, String gender);
 
 	@Query("SELECT DISTINCT c.color FROM CategoriesMst c where c.artist=?1 and c.productType=?2 and c.modelCode=?3")
 	List<String> getColorsByCode(String artist, String productType, String modelCode);

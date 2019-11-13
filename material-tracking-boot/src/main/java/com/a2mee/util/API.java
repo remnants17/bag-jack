@@ -19,7 +19,11 @@ public class API {
 	public static final String addStock = "/addStock";
 	public static final String getStockByProduct = "/getStockByProduct";
 	public static final String getStock = "/getStock";
-	
+	public static final String getStockByQrCode = "/getStockByQrCode";
+	public static final String sellItems = "/sellItems";
+	public static final String getStockByRetQrCode = "/getStockByRetQrCode";
+	public static final String reStockItems = "/reStockItems";
+	public static final String getStockBySerial = "/getStockBySerial";
 	
 	/* ........User/Role/Permission....... */
 	

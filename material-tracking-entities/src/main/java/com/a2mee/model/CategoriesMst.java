@@ -29,7 +29,7 @@ public class CategoriesMst {
 	private String color;
 	
 	@Column(name="size")
-	private int size;
+	private String size;
 	
 	@Column(name="gender")
 	private String gender;
@@ -74,11 +74,11 @@ public class CategoriesMst {
 		this.color = color;
 	}
 
-	public int getSize() {
+	public String getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 

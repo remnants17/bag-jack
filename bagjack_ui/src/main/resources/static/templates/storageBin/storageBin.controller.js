@@ -72,21 +72,6 @@
 			var url = stockLink + "/getStockByProduct?productType="+selectedProduct;
 			genericFactory.getAll(msg, url).then(function (response) {
 				$scope.stocks = response.data;
-				for(var i in $scope.stocks){
-					if($scope.stocks[i].modelCode==null)
-						$scope.stocks[i].modelCode="NA";
-					if($scope.stocks[i].size==0)
-						$scope.stocks[i].size="NA";
-					if($scope.stocks[i].color==null)
-						$scope.stocks[i].color="NA";
-
-					if($scope.stocks[i].gender==null)
-						$scope.stocks[i].gender="NA";
-					else if($scope.stocks[i].gender=='M')
-						$scope.stocks[i].gender="Male";
-					else
-						$scope.stocks[i].gender="Female";
-				}
 				$scope.isLoading = false;
 				$scope.showTable = true;
 
@@ -112,21 +97,7 @@
 			var url = stockLink + "/getStock";
 			genericFactory.getAll(msg, url).then(function (response) {
 				$scope.stocks = response.data;
-				for(var i in $scope.stocks){
-					if($scope.stocks[i].modelCode==null)
-						$scope.stocks[i].modelCode="NA";
-					if($scope.stocks[i].size==0)
-						$scope.stocks[i].size="NA";						
-					if($scope.stocks[i].color==null)
-						$scope.stocks[i].color="NA";
-
-					if($scope.stocks[i].gender==null)
-						$scope.stocks[i].gender="NA";
-					else if($scope.stocks[i].gender=='M')
-						$scope.stocks[i].gender="Male";
-					else
-						$scope.stocks[i].gender="Female";
-				}
+				
 				$scope.isLoading = false;
 				$scope.showTable = true;
 

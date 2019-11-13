@@ -14,4 +14,12 @@ public interface StockService {
 
 	List<Stock> getStock();
 
+	Stock getStockByQrCode(String qrCode);
+
+	void update(List<Stock> stocks);
+
+	Stock getStockByRetQrCode(String retQrCode);
+
+	Stock getStockBySerial(String serialNo);
+
 }

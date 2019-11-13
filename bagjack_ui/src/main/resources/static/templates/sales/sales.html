@@ -85,7 +85,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="page-title-box">
-						<h4 class="page-title float-left"> Storage </h4>
+						<h4 class="page-title float-left"> Sales and Returns </h4>
 						<div class="clearfix"></div>
 					</div>
 				</div>
@@ -100,36 +100,21 @@
 							<div class="col-md-12">
 								<div class="card-box">
 
-									<h4 class="m-t-0 header-title">Show Stock By: </h4>
+									<h4 class="m-t-0 header-title">Select: </h4>
 
 									<div class="form-row">
-										<div class="form-group col-sm-2 col-xs-3">
-											<label class="col-form-label">Select Product Type:<span> <i
-														style="color:red">*</i></span></label>
-										</div>
 										<div class="form-group col-sm-3 col-xs-3">
-											<select class="form-control f_left" ng-model="selectedProduct"
-												ng-change="fetchStock(selectedProduct)" required>
-												<option value="" disabled selected>Select Product</option>
-												<option ng-repeat="opts in productTypes track by $index"
-													value="{{opts}}">
-													{{opts}} </option>
-											</select>
-										</div>
-									</div>
-
-									<h4 class="m-t-0" style="padding: 20px 0;">Or:</h4>
-
-									<div class="form-row">
-										<div class="form-group col-sm-2 col-xs-3">
-											<label class="col-form-label">Get All Stock:<span> <i
-														style="color:red">*</i></span></label>
+											<button class="btn btn-warning btn-rounded waves-effect waves-light"
+												style="width:100%;"
+												ng-click="processSales()">
+												Product Sale
+											</button>
 										</div>
 										<div class="form-group col-sm-3 col-xs-3">
 											<button class="btn btn-warning btn-rounded waves-effect waves-light"
-												style="width:50%;"
-												ng-click="showAllStock();">
-												Show All 
+												style="width:100%;"
+												ng-click="processReturn()">
+												Return Product
 											</button>
 										</div>
 									</div>
@@ -144,13 +129,38 @@
 			<div class="row" ng-show="showData">
 				<div class="col-12">
 					<div class="page-title-box">
-						<div class="row text-center">
+						<div class="row text-center card-box">							
 							<div class="col-sm-12">
-								<img src="../../image/main_line.png">
-								<span class="m-t-0 header-title">Stock Data</span>
+								<img ng-show="isSales" src="../../image/sales.png">
+								<img ng-hide="isSales" src="../../image/return.png">
+								<span ng-show="isSales" class="m-t-0 header-title">Sales</span>
+								<span ng-hide="isSales" class="m-t-0 header-title">Returns</span>
 							</div>
+							<div class="col-sm-12 text-center">
+								<input type="text" ng-change="fetchItemDetails(qrCode)" 
+									ng-model="qrCode" class="f_left form-control" style="width: 30%; margin: 15px auto;">
+							</div>
+
+							<div class="col-sm-12 text-center" ng-hide="isSales">
+								<h4 class="m-t-0 header-title">Or Get By Manual Input:</h4>
+							</div>
+							
+							<div class="form-row" style="margin: auto;" ng-hide="isSales">
+									<div class="form-group col-sm-4 col-xs-3">
+										<label class="col-form-label">Search By Serial No.:</label>
+									</div>
+									<div class="form-group col-sm-4 col-xs-3">
+											<input type="text"
+											ng-model="serialNo" class="f_left form-control" style="width: 100%;">
+									</div>
+									<div class="form-group col-sm-3 col-xs-3">
+											<button class="btn btn-success btn-rounded w-md waves-effect waves-light"
+											ng-click="fetchBySerialNo(serialNo)"
+											style="width:20%;">Add</button>
+									</div>
+								</div>
+
 							<div class="col-12 text-center" ng-show="isLoading">
-								<!-- <span>Loading Storage Bins...</span> -->
 								<img src="../../image/transparent-background-loading.gif" alt="loading-img"
 									style="width: 50px; height: 50px">
 							</div>
@@ -168,6 +178,7 @@
 												<th> Size </th>
 												<th> Gender </th>
 												<th> Color </th>
+												<th> Action </th>
 											</tr>
 										</thead>
 										<tbody>
@@ -180,15 +191,25 @@
 												<td>{{arr.size}}</td>
 												<td>{{arr.gender}}</td>
 												<td>{{arr.color}}</td>
+												<td> <input type="image" class="btn"
+													src="../../image/close-window.png"
+													style="height:25px;width:25px;padding:0;"
+													ng-click="removeItem($index)"> </td>
 											</tr>
 										</tbody>
 									</table>
 								</div>
+								<button ng-show="isSales" class="btn btn-success btn-rounded w-md waves-effect waves-light"
+								ng-click="sellItems()"
+								style="float: right; width:20%;">Sell</button>
+								<button ng-hide="isSales" class="btn btn-success btn-rounded w-md waves-effect waves-light"
+								ng-click="reStockItems()"
+								style="float: right; width:20%;">Re-Stock</button>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>		
 
 	</div>
 </div>

@@ -19,6 +19,7 @@ angular.module('myApp', [
 	
 	'myApp.qrGenerator',
 	'myApp.storageBin',
+	'myApp.sales',
 	
 	'myApp.user',
 	'myApp.roleToUser',

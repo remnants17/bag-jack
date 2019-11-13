@@ -22,7 +22,7 @@ public class CategoriesServiceImpl implements CategoriesService{
 	}
 
 	@Override
-	public CategoriesMst getJacket(String productType, String artist, int size, String color, String gender) {
+	public CategoriesMst getJacket(String productType, String artist, String size, String color, String gender) {
 		Optional<CategoriesMst> obj = categoryRepo.findByProductTypeAndArtistAndSizeAndColorAndGender(productType, artist, size, color, gender);
 		return obj.isPresent()? obj.get() : null;
 	}
@@ -75,17 +75,17 @@ public class CategoriesServiceImpl implements CategoriesService{
 	}
 
 	@Override
-	public List<Integer> getSizes(String artist, String productType) {
+	public List<String> getSizes(String artist, String productType) {
 		return categoryRepo.getSizes(artist, productType);
 	}
 
 	@Override
-	public List<String> getGenders(String artist, String productType, int size) {
+	public List<String> getGenders(String artist, String productType, String size) {
 		return categoryRepo.getGenders(artist, productType, size);
 	}
 
 	@Override
-	public List<String> getColorsByGender(String artist, String productType, int size, String gender) {
+	public List<String> getColorsByGender(String artist, String productType, String size, String gender) {
 		return categoryRepo.getColorsByGender(artist, productType, size, gender);
 	}
 

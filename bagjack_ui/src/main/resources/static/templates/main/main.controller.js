@@ -46,6 +46,9 @@
 				if($scope.userPermissions[i].permissionValue == "storageBin")
 					$scope.showStorageBins = true;
 
+				if($scope.userPermissions[i].permissionValue == "sales")
+					$scope.showSales = true;
+
 				if($scope.userPermissions[i].permissionValue == "access_management")
 					$scope.showAccessManagement = true;
 			}
