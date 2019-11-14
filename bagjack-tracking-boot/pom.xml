@@ -2,9 +2,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>material-tracking-grp</groupId>
-	<artifactId>material-tracking-boot</artifactId>
-	<name>material_tracking</name>
+	<groupId>bagjack-tracking-grp</groupId>
+	<artifactId>bagjack-tracking-boot</artifactId>
+	<name>bagjack_tracking</name>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<parent>
@@ -97,8 +97,8 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>material-tracking-grp</groupId>
-			<artifactId>material-tracking-entities</artifactId>
+			<groupId>bagjack-tracking-grp</groupId>
+			<artifactId>bagjack-tracking-entities</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
@@ -109,7 +109,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>Boot-1.7</finalName>
+		<!-- <finalName>Boot-1.7</finalName> -->
 	</build>
 </project>
 
