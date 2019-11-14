@@ -1,0 +1,216 @@
+<style>
+	.main {
+		margin: 5% auto;
+	}
+
+	.b {
+		border-style: ridge;
+		border-color: #A9DBD1;
+		border-width: thin;
+		padding-top: 2vh;
+	}
+
+	input:focus {
+		border: 1px solid grey !important;
+	}
+
+	.input1 {
+		width: 120px !important;
+		line-height: 30px !important;
+		box-sizing: border-box !important;
+		border: 2px solid #ccc !important;
+		border-radius: 4px !important;
+		font-size: 12px !important;
+		-webkit-transition: width 0.4s ease-in-out !important;
+		transition: width 0.4s ease-in-out !important;
+	}
+
+	.reading {
+		border: 0px !important;
+		width: 120px !important;
+		line-height: 30px !important;
+		box-sizing: border-box !important;
+		text-align: center !important;
+		font-size: 12px !important;
+	}
+
+	.reading:focus {
+		border: 0px !important;
+		width: 120px !important;
+		line-height: 30px !important;
+		box-sizing: border-box !important;
+		text-align: center !important;
+		font-size: 12px !important;
+	}
+
+	.input1:focus,
+	.date1:focus {
+		width: 120px !important;
+		line-height: 30px !important;
+		border: 2.5px solid #ccc !important;
+		border-radius: 4px !important;
+
+	}
+
+	.date1 {
+		width: 120px !important;
+		line-height: 30px !important;
+		font-size: 12px !important;
+		border: 2px solid #ccc !important;
+		border-radius: 4px !important;
+		-webkit-transition: width 0.4s ease-in-out !important;
+		transition: width 0.4s ease-in-out !important;
+		background: #fff url(image/calendar_2.png) 97% 50% no-repeat !important;
+	}
+
+	.date1::-webkit-inner-spin-button {
+		display: none;
+	}
+
+	.date1::-webkit-calendar-picker-indicator {
+		opacity: 0;
+	}
+
+	input[type=number]::-webkit-inner-spin-button,
+	input[type=number]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+</style>
+
+<div class="content-page">
+	<!-- Start content -->
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title float-left"> Sales and Returns </h4>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<!-- end row -->
+
+			<!-- start rows -->
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card-box">
+
+									<h4 class="m-t-0 header-title">Select: </h4>
+
+									<div class="form-row">
+										<div class="form-group col-sm-3 col-xs-3">
+											<button class="btn btn-warning btn-rounded waves-effect waves-light"
+												style="width:100%;"
+												ng-click="processSales()">
+												Product Sale
+											</button>
+										</div>
+										<div class="form-group col-sm-3 col-xs-3">
+											<button class="btn btn-warning btn-rounded waves-effect waves-light"
+												style="width:100%;"
+												ng-click="processReturn()">
+												Return Product
+											</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>			
+
+			<div class="row" ng-show="showData">
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row text-center card-box">							
+							<div class="col-sm-12">
+								<img ng-show="isSales" src="../../image/sales.png">
+								<img ng-hide="isSales" src="../../image/return.png">
+								<span ng-show="isSales" class="m-t-0 header-title">Sales</span>
+								<span ng-hide="isSales" class="m-t-0 header-title">Returns</span>
+							</div>
+							<div class="col-sm-12 text-center">
+								<input type="text" ng-change="fetchItemDetails(qrCode)" placeholder="Scan QR Code"
+									ng-model="qrCode" class="f_left form-control" style="width: 30%; margin: 15px auto;">
+							</div>
+
+							<div class="col-sm-12 text-center" ng-hide="isSales">
+								<h4 class="m-t-0 header-title">Or Get By Manual Input:</h4>
+							</div>
+							
+							<div class="form-row" style="margin: auto;" ng-hide="isSales">
+									<div class="form-group col-sm-4 col-xs-3">
+										<label class="col-form-label">Enter Serial No.:</label>
+									</div>
+									<div class="form-group col-sm-4 col-xs-3">
+											<input type="text"
+											ng-model="serialNo" class="f_left form-control" style="width: 100%;">
+									</div>
+									<div class="form-group col-sm-3 col-xs-3">
+											<button class="btn btn-success btn-rounded w-md waves-effect waves-light"
+											ng-click="fetchBySerialNo(serialNo)"
+											style="width:20%;">Add</button>
+									</div>
+								</div>
+
+							<div class="col-12 text-center" ng-show="isLoading">
+								<img src="../../image/transparent-background-loading.gif" alt="loading-img"
+									style="width: 50px; height: 50px">
+							</div>
+							<div class="col-sm-12 col-xs-12" ng-show="!isLoading && showTable">
+								<div class="card-box table-responsive">
+									<table class="table table-bordered" datatable="ng" dt-column-defs="dtColumnDefs"
+										dt-options="dtOptions" style="width:100%;margin:0 auto">
+										<thead>
+											<tr class="customTable">
+												<th> # </th>
+												<th> Product </th>
+												<th> Serial No. </th>
+												<th> Artist </th>
+												<th> Model Code </th>
+												<th> Size </th>
+												<th> Gender </th>
+												<th> Color </th>
+												<th> Action </th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="arr in stocks track by $index">
+												<td>{{$index + 1}}</td>
+												<td>{{arr.productType}}</td>
+												<td>{{arr.serialCode}}</td>
+												<td>{{arr.artist}}</td>
+												<td>{{arr.modelCode}}</td>
+												<td>{{arr.size}}</td>
+												<td>{{arr.gender}}</td>
+												<td>{{arr.color}}</td>
+												<td> <input type="image" class="btn"
+													src="../../image/close-window.png"
+													style="height:25px;width:25px;padding:0;"
+													ng-click="removeItem($index)"> </td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<button ng-show="isSales" class="btn btn-success btn-rounded w-md waves-effect waves-light"
+								ng-click="sellItems()"
+								style="float: right; width:20%;">Sell</button>
+								<button ng-hide="isSales" class="btn btn-success btn-rounded w-md waves-effect waves-light"
+								ng-click="reStockItems()"
+								style="float: right; width:20%;">Re-Stock</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>		
+
+	</div>
+</div>
+</div>

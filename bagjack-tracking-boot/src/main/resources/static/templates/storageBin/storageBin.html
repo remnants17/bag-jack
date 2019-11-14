@@ -1,0 +1,195 @@
+<style>
+	.main {
+		margin: 5% auto;
+	}
+
+	.b {
+		border-style: ridge;
+		border-color: #A9DBD1;
+		border-width: thin;
+		padding-top: 2vh;
+	}
+
+	input:focus {
+		border: 1px solid grey !important;
+	}
+
+	.input1 {
+		width: 120px !important;
+		line-height: 30px !important;
+		box-sizing: border-box !important;
+		border: 2px solid #ccc !important;
+		border-radius: 4px !important;
+		font-size: 12px !important;
+		-webkit-transition: width 0.4s ease-in-out !important;
+		transition: width 0.4s ease-in-out !important;
+	}
+
+	.reading {
+		border: 0px !important;
+		width: 120px !important;
+		line-height: 30px !important;
+		box-sizing: border-box !important;
+		text-align: center !important;
+		font-size: 12px !important;
+	}
+
+	.reading:focus {
+		border: 0px !important;
+		width: 120px !important;
+		line-height: 30px !important;
+		box-sizing: border-box !important;
+		text-align: center !important;
+		font-size: 12px !important;
+	}
+
+	.input1:focus,
+	.date1:focus {
+		width: 120px !important;
+		line-height: 30px !important;
+		border: 2.5px solid #ccc !important;
+		border-radius: 4px !important;
+
+	}
+
+	.date1 {
+		width: 120px !important;
+		line-height: 30px !important;
+		font-size: 12px !important;
+		border: 2px solid #ccc !important;
+		border-radius: 4px !important;
+		-webkit-transition: width 0.4s ease-in-out !important;
+		transition: width 0.4s ease-in-out !important;
+		background: #fff url(image/calendar_2.png) 97% 50% no-repeat !important;
+	}
+
+	.date1::-webkit-inner-spin-button {
+		display: none;
+	}
+
+	.date1::-webkit-calendar-picker-indicator {
+		opacity: 0;
+	}
+
+	input[type=number]::-webkit-inner-spin-button,
+	input[type=number]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+</style>
+
+<div class="content-page">
+	<!-- Start content -->
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title float-left"> Storage </h4>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<!-- end row -->
+
+			<!-- start rows -->
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card-box">
+
+									<h4 class="m-t-0 header-title">Show Stock By: </h4>
+
+									<div class="form-row">
+										<div class="form-group col-sm-2 col-xs-3">
+											<label class="col-form-label">Select Product Type:<span> <i
+														style="color:red">*</i></span></label>
+										</div>
+										<div class="form-group col-sm-3 col-xs-3">
+											<select class="form-control f_left" ng-model="selectedProduct"
+												ng-change="fetchStock(selectedProduct)" required>
+												<option value="" disabled selected>Select Product</option>
+												<option ng-repeat="opts in productTypes track by $index"
+													value="{{opts}}">
+													{{opts}} </option>
+											</select>
+										</div>
+									</div>
+
+									<h4 class="m-t-0" style="padding: 20px 0;">Or:</h4>
+
+									<div class="form-row">
+										<div class="form-group col-sm-2 col-xs-3">
+											<label class="col-form-label">Get All Stock:<span> <i
+														style="color:red">*</i></span></label>
+										</div>
+										<div class="form-group col-sm-3 col-xs-3">
+											<button class="btn btn-warning btn-rounded waves-effect waves-light"
+												style="width:50%;"
+												ng-click="showAllStock();">
+												Show All 
+											</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>			
+
+			<div class="row" ng-show="showData">
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row text-center">
+							<div class="col-sm-12">
+								<img src="../../image/main_line.png">
+								<span class="m-t-0 header-title">Stock Data</span>
+							</div>
+							<div class="col-12 text-center" ng-show="isLoading">
+								<!-- <span>Loading Storage Bins...</span> -->
+								<img src="../../image/transparent-background-loading.gif" alt="loading-img"
+									style="width: 50px; height: 50px">
+							</div>
+							<div class="col-sm-12 col-xs-12" ng-show="!isLoading && showTable">
+								<div class="card-box table-responsive">
+									<table class="table table-bordered" datatable="ng" dt-column-defs="dtColumnDefs"
+										dt-options="dtOptions" style="width:100%;margin:0 auto">
+										<thead>
+											<tr class="customTable">
+												<th> # </th>
+												<th> Product </th>
+												<th> Serial No. </th>
+												<th> Artist </th>
+												<th> Model Code </th>
+												<th> Size </th>
+												<th> Gender </th>
+												<th> Color </th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="arr in stocks track by $index">
+												<td>{{$index + 1}}</td>
+												<td>{{arr.productType}}</td>
+												<td>{{arr.serialCode}}</td>
+												<td>{{arr.artist}}</td>
+												<td>{{arr.modelCode}}</td>
+												<td>{{arr.size}}</td>
+												<td>{{arr.gender}}</td>
+												<td>{{arr.color}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+	</div>
+</div>
+</div>
