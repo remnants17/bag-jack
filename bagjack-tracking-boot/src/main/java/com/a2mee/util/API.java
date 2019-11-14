@@ -25,6 +25,15 @@ public class API {
 	public static final String reStockItems = "/reStockItems";
 	public static final String getStockBySerial = "/getStockBySerial";
 	
+	
+	/* ........Reports....... */
+	public static final String todaysStock = "/todaysStock";
+	public static final String stockByDateRange = "/stockByDateRange";
+	public static final String todaysSales = "/todaysSales";
+	public static final String salesByDateRange = "/salesByDateRange";
+	public static final String todaysReturn = "/todaysReturn";
+	public static final String returnByDateRange = "/returnByDateRange";
+	
 	/* ........User/Role/Permission....... */
 	
 		/* ........User....... */

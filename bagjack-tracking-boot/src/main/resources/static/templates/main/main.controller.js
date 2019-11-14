@@ -49,8 +49,12 @@
 				if($scope.userPermissions[i].permissionValue == "sales")
 					$scope.showSales = true;
 
+				if($scope.userPermissions[i].permissionValue == "reports")
+					$scope.showReports = true;
+
 				if($scope.userPermissions[i].permissionValue == "access_management")
 					$scope.showAccessManagement = true;
+		
 			}
 
 			$('.loading').hide();

@@ -221,6 +221,10 @@
 			var msg = "Selling Items";
 			var url = stockLink + "/sellItems";
 			console.log(JSON.stringify($scope.stocks));
+			for(var i in $scope.stocks){
+				$scope.stocks[i].saleUserId = loginUser.id;
+				$scope.stocks[i].saleDate = new Date();
+			}
 			genericFactory.add(msg, url, $scope.stocks).then(function (response) {
 				$scope.isLoading = false;
 				$scope.showTable = false;
@@ -241,6 +245,10 @@
 			var msg = "Restocking Returned Items";
 			var url = stockLink + "/reStockItems";
 			console.log(JSON.stringify($scope.stocks));
+			for(var i in $scope.stocks){
+				$scope.stocks[i].returnUserId = loginUser.id;
+				$scope.stocks[i].returnDate = new Date();
+			}
 			genericFactory.add(msg, url, $scope.stocks).then(function (response) {
 				$scope.isLoading = false;
 				$scope.showTable = false;

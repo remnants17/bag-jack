@@ -139,6 +139,19 @@
                         </a>
                     </li>
 
+                    <li ng-show="showReports">
+                            <a href="javascript: void(0);"><i class="fi-server"></i> <span> Reports </span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a ui-sref="main.stocksReport" ui-sref-active="active">
+                                    <i class="fi-server"></i>Stocks Report</a></li>
+                                <li><a ui-sref="main.salesReport" ui-sref-active="active">
+                                    <i class="fi-server"></i>Sales Report</a></li>
+                                <li><a ui-sref="main.returnReport" ui-sref-active="active">
+                                    <i class="fi-server"></i>Return Report</a></li>
+                            </ul>
+                        </li>
+
                     <li ng-show="showAccessManagement">
                         <a href="javascript: void(0);"><i class="fa fa-user"></i> <span> Admin </span> <span
                                 class="menu-arrow"></span></a>

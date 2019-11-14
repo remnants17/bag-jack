@@ -1,5 +1,7 @@
 package com.a2mee.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,7 +47,26 @@ public class Stock {
 	
 	@Column(name="is_sold")
 	private String isSold;
+	
+	@Column(name="stock_user_id")
+	private String stockUserId;
 
+	@Column(name="stock_date")
+	private Date stockDate;
+	
+	@Column(name="sale_user_id")
+	private String saleUserId;
+	
+	@Column(name="sale_date")
+	private Date saleDate;
+	
+	@Column(name="return_user_id")
+	private String returnUserId;
+	
+	@Column(name="return_date")
+	private Date returnDate;
+	
+	
 	public int getStockId() {
 		return stockId;
 	}
@@ -132,13 +153,63 @@ public class Stock {
 
 	public void setIsSold(String isSold) {
 		this.isSold = isSold;
+	}	
+
+	public Date getStockDate() {
+		return stockDate;
+	}
+
+	public void setStockDate(Date stockDate) {
+		this.stockDate = stockDate;
+	}
+
+	public Date getSaleDate() {
+		return saleDate;
+	}
+
+	public void setSaleDate(Date saleDate) {
+		this.saleDate = saleDate;
+	}
+
+	public Date getReturnDate() {
+		return returnDate;
+	}
+
+	public void setReturnDate(Date returnDate) {
+		this.returnDate = returnDate;
+	}
+
+	public String getStockUserId() {
+		return stockUserId;
+	}
+
+	public void setStockUserId(String stockUserId) {
+		this.stockUserId = stockUserId;
+	}
+
+	public String getSaleUserId() {
+		return saleUserId;
+	}
+
+	public void setSaleUserId(String saleUserId) {
+		this.saleUserId = saleUserId;
+	}
+
+	public String getReturnUserId() {
+		return returnUserId;
+	}
+
+	public void setReturnUserId(String returnUserId) {
+		this.returnUserId = returnUserId;
 	}
 
 	@Override
 	public String toString() {
-		return "Stock [stockId=" + stockId + ", productCount=" + productCount + ", productType=" + productType
-				+ ", artist=" + artist + ", modelCode=" + modelCode + ", size=" + size + ", gender=" + gender
-				+ ", color=" + color + ", productCode=" + productCode + ", isSold=" + isSold + "]";
+		return "Stock [stockId=" + stockId + ", productCount=" + productCount + ", serialCode=" + serialCode
+				+ ", productType=" + productType + ", artist=" + artist + ", modelCode=" + modelCode + ", size=" + size
+				+ ", gender=" + gender + ", color=" + color + ", productCode=" + productCode + ", isSold=" + isSold
+				+ ", stockUserId=" + stockUserId + ", stockDate=" + stockDate + ", saleUserId=" + saleUserId
+				+ ", saleDate=" + saleDate + ", returnUserId=" + returnUserId + ", returnDate=" + returnDate + "]";
 	}
 	
 	

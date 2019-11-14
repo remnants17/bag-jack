@@ -8,11 +8,12 @@
 	'use strict';
 
 	angular.module('myApp.qrGenerator').controller('qrGeneratorController', qrGeneratorController);
-	qrGeneratorController.$inject = ['$state', '$scope', 'toastr', 'genericFactory', '$http']; //,'DTColumnDefBuilder'
+	qrGeneratorController.$inject = ['$state', '$scope', 'toastr', 'genericFactory', '$http', 'localStorageService', 'ApiEndpoint']; //,'DTColumnDefBuilder'
 
 
 	/* @ngInject */
-	function qrGeneratorController($state, $scope, toastr, genericFactory, $http) { //, DTColumnDefBuilder
+	function qrGeneratorController($state, $scope, toastr, genericFactory, $http, localStorageService, ApiEndpoint) { //, DTColumnDefBuilder
+		var loginUser = localStorageService.get(ApiEndpoint.userKey);
 		var categoryLink = staticUrl + '/category';
 		var stockLink = staticUrl + '/stock';
 		$scope.showArtists = false;
@@ -334,7 +335,9 @@
 								color: "NA",
 								productCount: count,
 								serialCode: zeroFill(count, 6),
-								isSold: 'N'
+								isSold: 'N',
+								stockUserId: loginUser.id,
+								stockDate: new Date()
 							}
 							$scope.qrCodeArr.push(obj);
 							$scope.finalArr.push(finalObj);
@@ -376,7 +379,9 @@
 								color: $scope.selectedColor,
 								productCount: count,
 								serialCode: zeroFill(count, 6),
-								isSold: 'N'
+								isSold: 'N',
+								stockUserId: loginUser.id,
+								stockDate: new Date()
 							}
 							$scope.qrCodeArr.push(obj);
 							$scope.finalArr.push(finalObj);
@@ -418,7 +423,9 @@
 								color: $scope.selectedColor,
 								productCount: count,
 								serialCode: zeroFill(count, 6),								
-								isSold: 'N'
+								isSold: 'N',
+								stockUserId: loginUser.id,
+								stockDate: new Date()
 							}
 							$scope.qrCodeArr.push(obj);
 							$scope.finalArr.push(finalObj);
