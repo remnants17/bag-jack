@@ -29,7 +29,7 @@ public interface StockRepo extends JpaRepository<Stock, Integer> {
 	@Query("FROM Stock s where s.productCode=?1 and s.isSold='S'")
 	Optional<Stock> getStockByRetQrCode(String retQrCode);
 
-	@Query("FROM Stock s where s.serialCode=?1 and s.isSold='S'")
-	Optional<Stock> getStockBySerial(String serialNo);
+	@Query("FROM Stock s where s.orderNo=?1 and s.isSold='S'")
+	Optional<List<Stock>> getStockByOrderNo(String orderNo);
 
 }

@@ -54,6 +54,8 @@
 		$scope.showTable2 = false;
 		$scope.showReturns = false;
 
+		$scope.saleTypes = ["W", "O", "R"];
+
 		/**
 		 * @author : Anurag
 		 * @Description : Start processing sales
@@ -118,6 +120,10 @@
 						$scope.isLoading = false;
 						$scope.showTable = false;
 					}else{
+						for(var i in $scope.stocks){
+							$scope.stocks[i].orderNo = "";
+							$scope.stocks[i].saleType = "";
+						}
 						$scope.showData = true;
 						$scope.isLoading = false;
 						$scope.showTable = true;
@@ -156,33 +162,34 @@
 		 * @Description : Fetch item by serial no.
 		 * @date : 13/11/2019
 		 */
-		$scope.fetchBySerialNo = function(serialNo) {
-			if (serialNo == "" || !serialNo) {
-				toastr.error("Please Enter a Serial No.");
+		$scope.fetchByOrderNo = function(orderNo) {
+			if (orderNo == "" || !orderNo) {
+				toastr.error("Please Enter a Order No.");
 				return;
 			}
-			for (var i in $scope.stocks) {
-				if($scope.stocks[i].serialCode == serialNo){
-					$scope.serialNo = "";
-					toastr.error("Already added");
-					return;
-				}
-			}
+			
 			$scope.showData = true;
 			$scope.isLoading = true;
 			$scope.showTable = false;
-			var msg = "Stock for selected serial number....', 'Successful !!";
-				var url = stockLink + "/getStockBySerial?serialNo=" + serialNo;
+			var msg = "Stock for selected order number....', 'Successful !!";
+				var url = stockLink + "/getStockByOrderNo?orderNo=" + orderNo;
 				genericFactory.getAll(msg, url).then(function (response) {
-					var resObj = response.data;
-					console.log(JSON.stringify(resObj));
-					if (resObj)
-						$scope.stocks.push(resObj);
-					else
-						toastr.error("Invalid Serial No.")
-					console.log(JSON.stringify($scope.stocks));
+					var temp = response.data;
+					var result = angular.copy($scope.stocks);
+					console.log(JSON.stringify(result));
+					if(!temp){
+						toastr.error("Invalid Order No.");
+					}else{
+						for(var l in temp){
+							result.push(temp[l]);
+						}
+						$scope.stocks = Array.from(new Set(result.map(a => a.stockId)))
+								.map(stockId => {
+								return result.find(a => a.stockId === stockId)
+							});
+					}
 
-					if($scope.stocks.length==0){
+					if($scope.stocks.length==0){						
 						$scope.showData = true;
 						$scope.isLoading = false;
 						$scope.showTable = false;
@@ -191,7 +198,7 @@
 						$scope.isLoading = false;
 						$scope.showTable = true;
 					}
-					$scope.serialNo = "";
+					$scope.orderNo = "";
 				});
 		}
 
@@ -217,14 +224,21 @@
 		$scope.sellItems = function() {
 			if($scope.stocks.length==0){
 				return;
-			}
-			var msg = "Selling Items";
-			var url = stockLink + "/sellItems";
-			console.log(JSON.stringify($scope.stocks));
-			for(var i in $scope.stocks){
+			}for(var i in $scope.stocks){
+				if($scope.stocks[i].orderNo == "" || !$scope.stocks[i].orderNo){
+					toastr.error("Please fill Order Numbers for all!");
+					return;
+				}
+				if($scope.stocks[i].saleType == "" || !$scope.stocks[i].saleType){
+					toastr.error("Please select Sale Type for all!");
+					return;
+				}
 				$scope.stocks[i].saleUserId = loginUser.id;
 				$scope.stocks[i].saleDate = new Date();
 			}
+			var msg = "Selling Items";
+			var url = stockLink + "/sellItems";
+			console.log(JSON.stringify($scope.stocks));			
 			genericFactory.add(msg, url, $scope.stocks).then(function (response) {
 				$scope.isLoading = false;
 				$scope.showTable = false;
@@ -267,8 +281,9 @@
 				'C<"clear">lfrtip'
 			);
 			$scope.dtColumnDefs = [
-				DTColumnDefBuilder.newColumnDef(3).notSortable(),
-				DTColumnDefBuilder.newColumnDef(3).notSortable()
+				DTColumnDefBuilder.newColumnDef(8).notSortable(),
+				DTColumnDefBuilder.newColumnDef(9).notSortable(),
+				DTColumnDefBuilder.newColumnDef(10).notSortable()
 			];
 		};
 

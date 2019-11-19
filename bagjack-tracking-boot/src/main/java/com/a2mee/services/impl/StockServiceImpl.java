@@ -55,8 +55,8 @@ public class StockServiceImpl implements StockService {
 	}
 
 	@Override
-	public Stock getStockBySerial(String serialNo) {
-		Optional<Stock> stock = stockRepo.getStockBySerial(serialNo);
+	public List<Stock> getStockByOrderNo(String orderNo) {
+		Optional<List<Stock>> stock = stockRepo.getStockByOrderNo(orderNo);
 		return stock.isPresent()? stock.get() : null;
 	}
 

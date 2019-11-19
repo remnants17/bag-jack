@@ -23,7 +23,7 @@ public class API {
 	public static final String sellItems = "/sellItems";
 	public static final String getStockByRetQrCode = "/getStockByRetQrCode";
 	public static final String reStockItems = "/reStockItems";
-	public static final String getStockBySerial = "/getStockBySerial";
+	public static final String getStockByOrderNo = "/getStockByOrderNo";
 	
 	
 	/* ........Reports....... */

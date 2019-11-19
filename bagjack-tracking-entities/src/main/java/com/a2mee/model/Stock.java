@@ -66,6 +66,14 @@ public class Stock {
 	@Column(name="return_date")
 	private Date returnDate;
 	
+	@Column(name="price")
+	private String price;
+	
+	@Column(name="order_no")
+	private String orderNo;
+	
+	@Column(name="sale_type")
+	private String SaleType;
 	
 	public int getStockId() {
 		return stockId;
@@ -201,6 +209,30 @@ public class Stock {
 
 	public void setReturnUserId(String returnUserId) {
 		this.returnUserId = returnUserId;
+	}	
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	public String getSaleType() {
+		return SaleType;
+	}
+
+	public void setSaleType(String saleType) {
+		SaleType = saleType;
 	}
 
 	@Override
@@ -209,7 +241,8 @@ public class Stock {
 				+ ", productType=" + productType + ", artist=" + artist + ", modelCode=" + modelCode + ", size=" + size
 				+ ", gender=" + gender + ", color=" + color + ", productCode=" + productCode + ", isSold=" + isSold
 				+ ", stockUserId=" + stockUserId + ", stockDate=" + stockDate + ", saleUserId=" + saleUserId
-				+ ", saleDate=" + saleDate + ", returnUserId=" + returnUserId + ", returnDate=" + returnDate + "]";
+				+ ", saleDate=" + saleDate + ", returnUserId=" + returnUserId + ", returnDate=" + returnDate
+				+ ", price=" + price + ", orderNo=" + orderNo + ", SaleType=" + SaleType + "]";
 	}
 	
 	

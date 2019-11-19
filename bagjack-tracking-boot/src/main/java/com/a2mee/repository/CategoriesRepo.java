@@ -38,7 +38,7 @@ public interface CategoriesRepo extends JpaRepository<CategoriesMst, Integer> {
 	@Query("SELECT DISTINCT c.color FROM CategoriesMst c where c.artist=?1 and c.productType=?2 and c.size=?3 and c.gender=?4")
 	List<String> getColorsByGender(String artist, String productType, String size, String gender);
 
-	@Query("SELECT DISTINCT c.color FROM CategoriesMst c where c.artist=?1 and c.productType=?2 and c.modelCode=?3")
+	@Query("SELECT DISTINCT c.color FROM CategoriesMst c where c.artist=?1 and c.productType=?2 and c.modelCode LIKE (CONCAT('%',?3,'%'))")
 	List<String> getColorsByCode(String artist, String productType, String modelCode);
 
 	

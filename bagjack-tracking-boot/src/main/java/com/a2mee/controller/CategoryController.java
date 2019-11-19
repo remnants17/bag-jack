@@ -137,7 +137,7 @@ public class CategoryController {
 							}
 						}
 						
-						Sheet LGSheet = workbook.getSheetAt(0); // contains LG
+						Sheet LGSheet = workbook.getSheetAt(3); // contains LG
 						i = 1;
 						while (i <= LGSheet.getLastRowNum()) { // for adding LG							
 							XSSFRow row = null;
@@ -161,7 +161,7 @@ public class CategoryController {
 							}
 						}
 						
-						Sheet SlingSheet = workbook.getSheetAt(2); // contains Sling
+						Sheet SlingSheet = workbook.getSheetAt(4); // contains Sling
 						i = 1;
 						while (i <= SlingSheet.getLastRowNum()) { // for adding Sling							
 							XSSFRow row = null;
@@ -257,8 +257,10 @@ public class CategoryController {
 	@GetMapping(API.getColorsByCode)
 	public @ResponseBody ResponseEntity<List<String>> getColorsByCode(@RequestParam String artist, @RequestParam String productType, @RequestParam String modelCode){
 		try {
+			modelCode = modelCode.split("-")[0];
 			return new ResponseEntity<List<String>>(categoriesService.getColorsByCode(artist, productType, modelCode), HttpStatus.OK);
 		}catch(Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

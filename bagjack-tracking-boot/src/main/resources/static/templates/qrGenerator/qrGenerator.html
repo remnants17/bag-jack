@@ -214,7 +214,7 @@
 												</select>
 											</div>
 										</div>
-										<div class="form-group col-sm-2 col-xs-2" ng-if="selectedProduct != 'LG'">
+										<div class="form-group col-sm-2 col-xs-2" ng-if="selectedProduct == 'Jacket'">
 										</div>
 										<div class="form-group col-sm-2" ng-show="showColors">
 											<label class="col-form-label" style="padding-top: 11px;"> Color
@@ -234,6 +234,17 @@
 									</div>
 
 									<div class="form-row" ng-show="showQuantity">
+											<div class="form-group col-sm-2 col-xs-3">
+												<label class="col-form-label" style="padding-top: 11px;"> Enter	Price:
+													<span> <i style="color:red">*</i></span></label>
+											</div>
+											<div class="form-group col-sm-3 col-xs-3">
+												<div class="col-form-label">
+													<input type="text"
+													ng-model="price" class="f_left form-control">
+												</div>
+											</div>
+										<div class="col-sm-2 col-xs-2"></div>
 										<div class="form-group col-sm-2 col-xs-3">
 											<label class="col-form-label" style="padding-top: 11px;"> Enter
 												Quantity:
@@ -246,7 +257,10 @@
 													ng-model="quantity" class="f_left form-control">
 											</div>
 										</div>
-										<div class="col-sm-4 col-xs-4"></div>
+									</div>
+
+									<div class="form-row" ng-show="showQuantity">
+										<div class="col-sm-9 col-xs-9"></div>
 										<div class="col-sm-3 col-xs-3">
 											<button style="width: 100%; margin-top: 5px;"
 												class="btn btn-warning btn-rounded w-md waves-effect waves-light"
@@ -255,6 +269,8 @@
 											</button>
 										</div>
 									</div>
+
+
 								</div>
 							</div>
 						</div>
@@ -276,7 +292,7 @@
 									<div ng-repeat="arr in qrCodeArr track by $index">
 										<div id="qrPrintParent{{$index}}">
 											<div class="main"
-												style="border:1px solid #000;padding:5px;width:400px;font-family:arial;height:185px;page-break-after: always;">
+												style="border:1px solid #000;padding:5px;width:400px;font-family:arial;height:210px;page-break-after: always;">
 												<p style="font-size:14px;font-family:arial;text-align:left;font-weight:500;margin-bottom:2px;line-height:18px;margin-left:10px; margin-top: 5px;"><b>Bag Jack</b></p>
 												<div style=" width:58%;text-align: left;float:left;margin-right:-1%;margin-top:2px">
 													<p
@@ -284,7 +300,7 @@
 														Serial No.: {{arr.serialCode}} </p>
 													<p
 														style="font-size: 13px;position: relative;margin-top:0px;padding-left:10px;width:100%;text-overflow: ellipsis;">
-														Product: {{arr.product}} </p>
+														Product: {{arr.productType}} </p>
 													<p
 														style="font-size: 13px;position: relative;margin-top:0px;padding-left:10px;width:100%;text-overflow: ellipsis;">
 														Artist: {{arr.artist}} </p>
@@ -300,6 +316,9 @@
 													<p ng-if="arr.color!='NA'"
 														style="font-size: 13px;position: relative;margin-top:0px;padding-left:10px;width:100%;text-overflow: ellipsis;">
 														Color: {{arr.color}} </p>
+													<p ng-if="arr.color!='NA'"
+														style="font-size: 13px;position: relative;margin-top:0px;padding-left:10px;width:100%;text-overflow: ellipsis;">
+														Price: {{arr.price}} </p>
 													
 											</div>
 											<div style="float:left;width:38%;margin-left:1%;margin-top:0px;">

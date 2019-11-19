@@ -77,7 +77,7 @@ public class StockController {
 		}
 	}
 	
-	/* for getting stock by serial Code */
+	/* for getting stock by qrCode */
 	@GetMapping(API.getStockByQrCode)
 	public @ResponseBody ResponseEntity<Stock> getStockByQrCode(@RequestParam String qrCode){
 		try {
@@ -89,10 +89,10 @@ public class StockController {
 	}
 	
 	/* for getting stock by qrCode */
-	@GetMapping(API.getStockBySerial)
-	public @ResponseBody ResponseEntity<Stock> getStockBySerial(@RequestParam String serialNo){
+	@GetMapping(API.getStockByOrderNo)
+	public @ResponseBody ResponseEntity<List<Stock>> getStockByOrderNo(@RequestParam String orderNo){
 		try {
-			return new ResponseEntity<Stock>(stockService.getStockBySerial(serialNo), HttpStatus.OK);
+			return new ResponseEntity<List<Stock>>(stockService.getStockByOrderNo(orderNo), HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

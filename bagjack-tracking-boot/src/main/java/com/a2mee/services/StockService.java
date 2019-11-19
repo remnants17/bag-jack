@@ -20,6 +20,6 @@ public interface StockService {
 
 	Stock getStockByRetQrCode(String retQrCode);
 
-	Stock getStockBySerial(String serialNo);
+	List<Stock> getStockByOrderNo(String orderNo);
 
 }

@@ -73,6 +73,7 @@
 			$scope.selectedGender = '';
 			$scope.selectedColor = '';
 			$scope.quantity = '';
+			$scope.price = '';
 			var msg = "Artists Load....', 'Successful !!";
 			var url = categoryLink + "/getArtists?productType=" + productName;
 			genericFactory.getAll(msg, url).then(function (response) {
@@ -96,6 +97,7 @@
 			$scope.selectedGender = '';
 			$scope.selectedColor = '';
 			$scope.quantity = '';
+			$scope.price = '';
 			var msg = "";
 			var url = "";
 			if ($scope.selectedProduct == $scope.productTypes[1]) {
@@ -135,6 +137,7 @@
 		$scope.fetchGender = function (size) {
 			$scope.selectedColor = '';
 			$scope.quantity = '';
+			$scope.price = '';
 			var msg = "Model Code Load....', 'Successful !!";
 			var url = categoryLink + "/getGenders?artist=" + $scope.selectedArtist + "&productType=" + $scope.selectedProduct + "&size=" + size;
 			genericFactory.getAll(msg, url).then(function (response) {
@@ -156,6 +159,7 @@
 		 */
 		$scope.fetchColorByGender = function (gender) {
 			$scope.quantity = '';
+			$scope.price = '';
 			$scope.colors = [];
 			var msg = "Model Code Load....', 'Successful !!";
 			var url = categoryLink + "/getColorsByGender?artist=" + $scope.selectedArtist + "&productType=" + $scope.selectedProduct + "&size=" + $scope.selectedSize + "&gender=" + gender;
@@ -178,10 +182,11 @@
 		 */
 		$scope.fetchColorByCode = function (modelCode) {
 			$scope.quantity = '';
+			$scope.price = '';
 			$scope.colors = [];
 			var msg = "";
 			var url = "";
-			if ($scope.selectedProduct == $scope.productTypes[3]) {
+			if ($scope.selectedProduct == $scope.productTypes[3] || $scope.selectedProduct == $scope.productTypes[0]) {
 				msg = "colors Load....', 'Successful !!";
 				url = categoryLink + "/getColorsByCode?artist=" + $scope.selectedArtist + "&productType=" + $scope.selectedProduct + "&modelCode=" + modelCode;
 				genericFactory.getAll(msg, url).then(function (response) {
@@ -196,6 +201,7 @@
 				});
 			} else {				
 				$scope.quantity = '';
+				$scope.price = '';
 				$scope.showQuantity = true;
 			}
 		}
@@ -207,6 +213,7 @@
 		 */
 		$scope.activateQuantity = function () {
 			$scope.quantity = '';
+			$scope.price = '';
 			$scope.showQuantity = true;
 		}
 
@@ -301,7 +308,7 @@
 				return;
 			}
 
-			if($scope.selectedProduct == 'FC' || $scope.selectedProduct == 'LD' || $scope.selectedProduct == 'Sling')
+			if($scope.selectedProduct == 'LD' || $scope.selectedProduct == 'Sling')
 				if(!$scope.selectedModelCode || !$scope.selectedArtist || $scope.selectedModelCode == "" || $scope.selectedArtist == ""){
 					toastr.error("Please select all fields")
 					return;
@@ -323,7 +330,8 @@
 								size: "NA",
 								gender: "NA",
 								color: "NA",
-								serialCode: zeroFill(count, 6)
+								serialCode: zeroFill(count, 6),
+								price: $scope.price
 							};
 							var finalObj = {
 								productCode: qrCode+"-"+zeroFill(count, 6),
@@ -337,7 +345,8 @@
 								serialCode: zeroFill(count, 6),
 								isSold: 'N',
 								stockUserId: loginUser.id,
-								stockDate: new Date()
+								stockDate: new Date(),
+								price: $scope.price
 							}
 							$scope.qrCodeArr.push(obj);
 							$scope.finalArr.push(finalObj);
@@ -367,7 +376,8 @@
 								size: $scope.selectedSize,
 								gender: $scope.selectedGender,
 								color: $scope.selectedColor,
-								serialCode: zeroFill(count, 6)
+								serialCode: zeroFill(count, 6),
+								price: $scope.price
 							};
 							var finalObj = {
 								productCode: qrCode+"-"+zeroFill(count, 6),
@@ -381,14 +391,15 @@
 								serialCode: zeroFill(count, 6),
 								isSold: 'N',
 								stockUserId: loginUser.id,
-								stockDate: new Date()
+								stockDate: new Date(),
+								price: $scope.price
 							}
 							$scope.qrCodeArr.push(obj);
 							$scope.finalArr.push(finalObj);
 					}
 				}			
 
-			if($scope.selectedProduct == 'LG')
+			if($scope.selectedProduct == 'FC' || $scope.selectedProduct == 'LG')
 				if(!$scope.selectedModelCode || !$scope.selectedArtist || !$scope.selectedColor || 
 					$scope.selectedModelCode == "" || $scope.selectedArtist == "" || $scope.selectedColor == ""){
 					toastr.error("Please select all fields")
@@ -412,6 +423,7 @@
 								gender: "NA",
 								color: $scope.selectedColor,
 								serialCode: zeroFill(count, 6),
+								price: $scope.price
 							};
 							var finalObj = {
 								productCode: qrCode+"-"+zeroFill(count, 6),
@@ -425,7 +437,8 @@
 								serialCode: zeroFill(count, 6),								
 								isSold: 'N',
 								stockUserId: loginUser.id,
-								stockDate: new Date()
+								stockDate: new Date(),
+								price: $scope.price
 							}
 							$scope.qrCodeArr.push(obj);
 							$scope.finalArr.push(finalObj);
@@ -483,6 +496,7 @@
 					genericFactory.add(msg, url, $scope.finalArr).then(function (response) {
 						$scope.showPrintArea = false;
 						$scope.quantity = "";
+						$scope.price = '';
 						$scope.fetchCount();
 					});
 				},100);
