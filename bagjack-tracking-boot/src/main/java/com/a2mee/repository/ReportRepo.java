@@ -18,10 +18,10 @@ public interface ReportRepo extends JpaRepository<Stock, Integer>{
 	@Query("from Stock s where s.stockDate BETWEEN ?1 AND ?2")
 	List<Stock> getTodaysStock(Date from, Date to);
 
-	@Query("from Stock s where s.saleDate=?1 and s.isSold!='N'")
+	@Query("from Stock s where s.saleDate=?1 and (s.isSold='S' OR s.isSold='R')")
 	List<Stock> getTodaysSales(Date searchDate);
 
-	@Query("from Stock s where s.isSold!='N' and s.saleDate BETWEEN ?1 AND ?2")
+	@Query("from Stock s where (s.isSold='S' OR s.isSold='R') and s.saleDate BETWEEN ?1 AND ?2")
 	List<Stock> getSalesByDateRange(Date from, Date to);
 
 	@Query("from Stock s where s.returnDate=?1 and s.isSold='R'")

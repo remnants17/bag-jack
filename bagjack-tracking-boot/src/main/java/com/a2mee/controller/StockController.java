@@ -133,7 +133,7 @@ public class StockController {
 				retStock.setArtist(stock.getArtist());
 				retStock.setColor(stock.getColor());
 				retStock.setGender(stock.getGender());
-				retStock.setIsSold("N");
+				retStock.setIsSold("B");
 				retStock.setModelCode(stock.getModelCode());
 				retStock.setPrice(stock.getPrice());
 				retStock.setProductCode(stock.getProductCode());

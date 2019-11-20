@@ -37,6 +37,7 @@
 					'color': 'Color',
 					'price' : 'Price',
 					'stockDate': "Stock Date",
+					'isSold': "Status"
 					};
 		})();		
 
@@ -72,7 +73,10 @@
 					vm.reportsList[index].stockDate = $filter('date')(vm.reportsList[index].stockDate,"dd/MM/yyyy");
 					if(vm.reportsList[index].isSold == 'N'){
 						vm.reportsList[index].isSold = "In Stock";
-					}else if(vm.reportsList[index].isSold == 'S'){
+					}else if(vm.reportsList[index].isSold == 'B'){
+						vm.reportsList[index].isSold = "Re-Stocked";
+					}
+					else if(vm.reportsList[index].isSold == 'S'){
 						vm.reportsList[index].isSold = "Sold";
 					}else{
 						vm.reportsList[index].isSold = "Returned";
@@ -157,6 +161,7 @@
 				'orderNo': 'Order No.',
 				'saleType' : 'Sales Type',
 				'saleDate': "Sold Date",
+				'isSold': "Status"
 				};
 		})();		
 
@@ -264,10 +269,12 @@
 				'serialCode': 'Serial No.',
 				'artist': 'Artist',
 				'modelCode': 'Model Code',
-				'size': 'size',
-				'gender':'gender',
-				'color': 'color',
+				'size': 'Size',
+				'gender':'Gender',
+				'color': 'Color',
 				'price': 'Price',
+				'orderNo': 'Order No.',
+				'saleType' : 'Sales Type',
 				'returnDate': "Returned Date"
 				};
 		})();		
