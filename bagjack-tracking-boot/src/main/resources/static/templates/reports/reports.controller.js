@@ -32,11 +32,11 @@
 					'serialCode': 'Serial No.',
 					'artist': 'Artist',
 					'modelCode': 'Model Code',
-					'size': 'size',
-					'gender':'gender',
-					'color': 'color',
+					'size': 'Size',
+					'gender':'Gender',
+					'color': 'Color',
+					'price' : 'Price',
 					'stockDate': "Stock Date",
-					'isSold': "Status"
 					};
 		})();		
 
@@ -150,11 +150,13 @@
 				'serialCode': 'Serial No.',
 				'artist': 'Artist',
 				'modelCode': 'Model Code',
-				'size': 'size',
-				'gender':'gender',
-				'color': 'color',
+				'size': 'Size',
+				'gender':'Gender',
+				'color': 'Color',
+				'price': 'Price',
+				'orderNo': 'Order No.',
+				'saleType' : 'Sales Type',
 				'saleDate': "Sold Date",
-				'isSold': "Status"
 				};
 		})();		
 
@@ -265,6 +267,7 @@
 				'size': 'size',
 				'gender':'gender',
 				'color': 'color',
+				'price': 'Price',
 				'returnDate': "Returned Date"
 				};
 		})();		

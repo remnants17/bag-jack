@@ -1,5 +1,6 @@
 package com.a2mee.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -124,8 +125,28 @@ public class StockController {
 	@PostMapping(API.reStockItems)
 	public @ResponseBody ResponseEntity reStockItems(@RequestBody List<Stock> stocks){
 		try {
-			stocks.forEach(s->s.setIsSold("R"));
+			stocks.forEach(s->s.setIsSold("R"));			
 			stockService.update(stocks);
+			List<Stock> retStocks = new ArrayList<>();
+			for(Stock stock:stocks) {
+				Stock retStock = new Stock();
+				retStock.setArtist(stock.getArtist());
+				retStock.setColor(stock.getColor());
+				retStock.setGender(stock.getGender());
+				retStock.setIsSold("N");
+				retStock.setModelCode(stock.getModelCode());
+				retStock.setPrice(stock.getPrice());
+				retStock.setProductCode(stock.getProductCode());
+				retStock.setProductCount(stock.getProductCount());
+				retStock.setProductType(stock.getProductType());
+				retStock.setSerialCode(stock.getSerialCode());
+				retStock.setSize(stock.getSize());
+				retStock.setStockDate(stock.getReturnDate());
+				retStock.setStockUserId(stock.getReturnUserId());
+				retStocks.add(retStock);
+			}
+			stockService.addAll(retStocks);
+			
 			return new ResponseEntity(HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
